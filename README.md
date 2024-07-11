@@ -8,7 +8,7 @@
 
 <sup>1</sup> Sun Yat-sen University, <sup>2</sup> Pengcheng Lab, <sup>3</sup> Meituan Inc, <sup>4</sup> HIT, Shenzhen
 
-(<sup>:email:</sup>) corresponding author.
+<sup>:email:</sup> corresponding author.
 
 [[`Paper`](https://arxiv.org/abs/2407.07844)] [[`HuggingFace`]()] [[`BibTex`](#citation)]
 
