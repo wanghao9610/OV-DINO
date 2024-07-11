@@ -30,7 +30,7 @@ This project contains the official PyTorch implementation, pre-trained models, f
 <img src="docs/ovdino_framework.png" width="800">
 
 ## TODO
-- [ ] Release the pre-trained model weights.
+- [ ] Release the pre-trained model.
 - [ ] Release the evaluation and fine-tuning code.
 - [ ] Support the local inference demo.
 - [ ] Support the web demo.
