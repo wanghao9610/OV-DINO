@@ -8,7 +8,7 @@
 
 <sup>1</sup> Sun Yat-sen University, <sup>2</sup> Pengcheng Lab, <sup>3</sup> Meituan Inc, <sup>4</sup> HIT, Shenzhen
 
-[[`Paper`]()] [[`HuggingFace`]()] [[`BibTex`](#black_nib-citation)]
+[[`Paper`](https://arxiv.org/abs/2407.07844)] [[`HuggingFace`]()] [[`BibTex`](#citation)]
 
 </div>
 
@@ -40,10 +40,10 @@ This project contains the official PyTorch implementation, pre-trained models, f
 If you find OV-DINO is helpful for your research or applications, please consider giving us a star 🌟 and citing it by the following BibTex entry.
 
 ```bibtex
-@article{ovdino,
-  title={Unified Open-Vocabulary Detection with Language-Aware Selective Fusion},
-  author={Hao Wang and Pengzhen Ren and Zequn Jie and Xiao Dong and Chengjian Feng and others},
-  journal={},
+@article{wang2024ovdino,
+  title={OV-DINO: Unified Open-Vocabulary Detection with Language-Aware Selective Fusion}, 
+  author={Hao Wang and Pengzhen Ren and Zequn Jie and Xiao Dong and Chengjian Feng and Yinlong Qian and Lin Ma and Dongmei Jiang and Yaowei Wang and Xiangyuan Lan and Xiaodan Liang},
+  journal={arXiv preprint arXiv:2407.07844},
   year={2024}
 }
 ```
