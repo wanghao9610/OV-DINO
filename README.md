@@ -69,6 +69,7 @@ OV-DINO
 │   └── swin
 ├── ovdino
 │   ├── configs
+│   ├── demo
 │   ├── detectron2-717ab9
 │   ├── detrex
 │   ├── projects
