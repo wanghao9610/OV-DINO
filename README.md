@@ -18,6 +18,8 @@
 
 - **`15/07/2024`**: We release the fine-tuning code, try to fine-tune on your custom dataset. Feel free to raise issue if you encounter some problem.
 
+- **`15/07/2024`**: We release the local inference demo, try to deploy OV-DINO on you local machine and run inference on images.
+
 - **`14/07/2024`**: We release the pre-trained models and the evaluation code.
 
 - **`11/07/2024`**: We release OV-DINO paper on arxiv. Code and pre-trained model are coming soon.
@@ -91,13 +93,13 @@ pip install -e ./
 ### 2. Data Pre-preparing
 #### COCO
 * Download [COCO](https://cocodataset.org/#download) from the official website, and put them on datas/coco folder.
-  ```
+  ```bash
   wget http://images.cocodataset.org/zips/train2017.zip -O datas/coco/train2017.zip
   wget http://images.cocodataset.org/zips/val2017.zip -O datas/coco/val2017.zip
   wget http://images.cocodataset.org/annotations/annotations_trainval2017.zip -O datas/coco/annotations_trainval2017.zip
   ```
 * Extract the ziped files, and remove them:
-  ```
+  ```bash
   unzip datas/coco/train2017.zip -d datas/coco
   unzip datas/coco/val2017.zip -d datas/coco
   unzip datas/coco/annotations_trainval2017.zip -d datas/coco
@@ -106,24 +108,24 @@ pip install -e ./
 
 #### LVIS
 * Download LVIS annotation files:
-  ```
+  ```bash
   wget https://huggingface.co/hao9610/OV-DINO/resolve/main/lvis_v1_minival_inserted_image_name.json -O datas/lvis/annotations/lvis_v1_minival_inserted_image_name.json
   wget https://huggingface.co/hao9610/OV-DINO/resolve/main/lvis_v1_val.json -O datas/lvis/annotations/lvis_v1_val.json
   ```
 * Soft-link COCO to LVIS:
-  ```
+  ```bash
   ln -s $(realpath datas/coco/train2017) datas/lvis
   ln -s $(realpath datas/coco/val2017) datas/lvis
   ```
 ### 3. Evaluation
 Download the pre-trained model from [Model Zoo](#model-zoo), and put them on inits/ovdino directory.
-```
+```bash
 cd ovdino
 sh scripts/eval.sh path_to_eval_config_file path_to_pretrained_model output_directory
 ```
 
 #### Zero-Shot Evaluation on COCO Benchmark
-```
+```bash
 cd ovdino
 sh scripts/eval.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_eval_coco.py \
@@ -131,7 +133,7 @@ sh scripts/eval.sh \
   ../wkdrs/eval_ovdino
 ```
 #### Zero-Shot Evaluation on LVIS Benchmark
-```
+```bash
 cd ovdino
 sh scripts/eval.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_eval_lvismv.py \
@@ -146,7 +148,7 @@ sh scripts/eval.sh \
 
 ### 4. Fine-Tuning
 #### Fine-Tuning on COCO Dataset
-```
+```bash
 cd ovdino
 sh scripts/train.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_ft_coco_24ep.py \
@@ -157,18 +159,39 @@ sh scripts/train.sh \
 * Prepare your custom dataset as the COCO annotation format.
 
 * Refer the following command to run fine-tuning.
-```
-cd ovdino
-sh scripts/train.sh \
-  projects/ovdino/configs/ovdino_swin_tiny224_bert_base_ft_custom_24ep.py \
-  ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth
-```
+  ```bash
+  cd ovdino
+  sh scripts/train.sh \
+    projects/ovdino/configs/ovdino_swin_tiny224_bert_base_ft_custom_24ep.py \
+    ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth
+  ```
+## :computer: Demo
+* Local inference on a image or folder give the category names.
+  ```bash
+  cd ovdino
+  sh scripts/demo.sh demo_config.py pretrained_model category_names input_images_or_directory output_directory
+  ```
+  Examples:
+  ```bash
+  cd ovdino
+  # single image inference
+  sh scripts/demo.sh demo_config.py pretrained_model "class0 class1 class2 ..."  img0.jpg output_dir/img0_vis.jpg
+
+  # multi images inference
+  sh scripts/demo.sh demo_config.py pretrained_model "class0 long_class1 long_class2 ..."  "img0.jpg img1.jpg" output_dir
+
+  # image foler inference
+  sh scripts/demo.sh demo_config.py pretrained_model "class0 long_class1 long_class2 ..."  input_dir output_dir
+  ```
+  NOTE: the input category_names are separated by spaces, and the words of single class are connected by underline (_).
+
+* Web inference demo. Coming soon.
 
 ## :white_check_mark: TODO
 - [x] Release the pre-trained model.
 - [x] Release the fine-tuning and evaluation code.
-- [ ] Support the local inference demo.
-- [ ] Support the web demo.
+- [x] Support the local inference demo.
+- [ ] Support the web inference demo.
 - [ ] Release the pre-training code.
 
 ## :blush: Acknowledge
