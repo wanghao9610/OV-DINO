@@ -180,7 +180,7 @@ sh scripts/train.sh \
   # multi images inference
   sh scripts/demo.sh demo_config.py pretrained_model "class0 long_class1 long_class2 ..."  "img0.jpg img1.jpg" output_dir
 
-  # image foler inference
+  # image folder inference
   sh scripts/demo.sh demo_config.py pretrained_model "class0 long_class1 long_class2 ..."  input_dir output_dir
   ```
   NOTE: the input category_names are separated by spaces, and the words of single class are connected by underline (_).
