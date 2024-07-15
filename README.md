@@ -10,7 +10,7 @@
 
 <sup>:email:</sup> corresponding author.
 
-[[`Paper`](https://arxiv.org/abs/2407.07844)] [[`HuggingFace`](https://huggingface.co/hao9610/OV-DINO)] [[`BibTex`](#citation)]
+[[`Paper`](https://arxiv.org/abs/2407.07844)] [[`HuggingFace`](https://huggingface.co/hao9610/OV-DINO)] [[`BibTex`](#pushpin-citation)]
 
 </div>
 
