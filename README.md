@@ -29,7 +29,7 @@ This project contains the official PyTorch implementation, pre-trained models, f
 
 * OV-DINO entails a Unified Data Integration pipeline that integrates diverse data sources for end-to-end pre-training, and a Language-Aware Selective Fusion module to improve the vision-language understanding of the model.
 
-* OV-DINO shows significant performance improvement on COCO and LVIS benchmarks compared to previous methods, achieving relative improvements of +2.5\% AP on COCO and +13.6\% AP on LVIS compared to G-DINO in zero-shot evaluation.
+* OV-DINO shows significant performance improvement on COCO and LVIS benchmarks compared to previous methods, achieving relative improvements of +2.5\% AP on COCO and +12.6\% AP on LVIS compared to G-DINO in zero-shot evaluation.
 
 ## :page_facing_up: Overview
 
