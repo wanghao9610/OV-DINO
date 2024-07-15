@@ -621,7 +621,7 @@ class OVDINO(nn.Module):
         # box_pred.shape: 1, 300, 4
         prob = box_cls.sigmoid()
         # follow glip(ref: https://github.com/microsoft/GLIP/blob/a5f302bfd4c5c67010e29f779e3b0bde94e89985/maskrcnn_benchmark/modeling/rpn/inference.py#L510).
-        # We perform sqrt of cls_prob to obtain more larger probility for visulization.
+        # We perform sqrt of cls_prob to obtain more larger probability for visualization.
         prob = torch.sqrt(prob)
         topk_values, topk_indexes = torch.topk(
             prob.view(box_cls.shape[0], -1), self.select_box_nums_for_evaluation, dim=1
