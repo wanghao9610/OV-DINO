@@ -4,21 +4,25 @@
 
 [Hao Wang](https://github.com/wanghao9610)<sup>1,2</sup>,[Pengzhen Ren](https://scholar.google.com/citations?user=yVxSn70AAAAJ&hl)<sup>1</sup>,[Zequn Jie](https://scholar.google.com/citations?user=4sKGNB0AAAAJ&hl)<sup>3</sup>, [Xiao Dong](https://scholar.google.com.sg/citations?user=jXLkbw8AAAAJ&hl)<sup>1</sup>, [Chengjian Feng](https://fcjian.github.io/)<sup>3</sup>, [Yinlong Qian](https://scholar.google.com/citations?user=8tPN5CAAAAAJ&hl)<sup>3</sup>,
 
-[Lin Ma](https://forestlinma.com/)<sup>3</sup>, [Dongmei Jiang](https://scholar.google.com/citations?user=Awsue7sAAAAJ&hl)<sup>1</sup>, [Yaowei Wang](https://scholar.google.com/citations?user=o_DllmIAAAAJ&hl)<sup>1,4</sup>, [Xiangyuan Lan](https://scholar.google.com/citations?user=c3iwWRcAAAAJ&hl)<sup>1</sup><sup>:email:</sup>, [Xiaodan Liang](https://scholar.google.com/citations?user=voxznZAAAAAJ&hl)<sup>1,2</sup><sup>:email:</sup>
+[Lin Ma](https://forestlinma.com/)<sup>3</sup>, [Dongmei Jiang](https://scholar.google.com/citations?user=Awsue7sAAAAJ&hl)<sup>3</sup>, [Yaowei Wang](https://scholar.google.com/citations?user=o_DllmIAAAAJ&hl)<sup>3,4</sup>, [Xiangyuan Lan](https://scholar.google.com/citations?user=c3iwWRcAAAAJ&hl)<sup>3</sup><sup>:email:</sup>, [Xiaodan Liang](https://scholar.google.com/citations?user=voxznZAAAAAJ&hl)<sup>1,2</sup><sup>:email:</sup>
 
 <sup>1</sup> Sun Yat-sen University, <sup>2</sup> Pengcheng Lab, <sup>3</sup> Meituan Inc, <sup>4</sup> HIT, Shenzhen
 
 <sup>:email:</sup> corresponding author.
 
-[[`Paper`](https://arxiv.org/abs/2407.07844)] [[`HuggingFace`]()] [[`BibTex`](#citation)]
+[[`Paper`](https://arxiv.org/abs/2407.07844)] [[`HuggingFace`](https://huggingface.co/hao9610/OV-DINO)] [[`BibTex`](#citation)]
 
 </div>
 
-## Updates
+## :fire: Updates
+
+- **`15/07/2024`**: We release the fine-tuning code, try to fine-tune on your custom dataset. Feel free to raise issue if you encounter some problem.
+
+- **`14/07/2024`**: We release the pre-trained models and the evaluation code.
 
 - **`11/07/2024`**: We release OV-DINO paper on arxiv. Code and pre-trained model are coming soon.
 
-## Introduction
+## :rocket: Introduction
 This project contains the official PyTorch implementation, pre-trained models, fine-tuning code, and inference demo for OV-DINO.
 
 * OV-DINO is a novel unified open vocabulary detection approach that offers superior performance and effectiveness for practical real-world application.
@@ -27,22 +31,154 @@ This project contains the official PyTorch implementation, pre-trained models, f
 
 * OV-DINO shows significant performance improvement on COCO and LVIS benchmarks compared to previous methods, achieving relative improvements of +2.5\% AP on COCO and +13.6\% AP on LVIS compared to G-DINO in zero-shot evaluation.
 
-## Overview
+## :page_facing_up: Overview
 
 <img src="docs/ovdino_framework.png" width="800">
 
-## TODO
-- [ ] Release the pre-trained model.
-- [ ] Release the evaluation and fine-tuning code.
+## :sparkles: Model Zoo
+| Model    | Pre-Train Data  | AP<sup>mv</sup> | AP<sub>r</sub>  | AP<sub>c</sub>  | AP<sub>f</sub>  | AP<sup>val</sup> | AP<sub>r</sub>  | AP<sub>c</sub>  | AP<sub>f</sub> | AP<sup>coco</sup> | Weights |
+| -------- | --------------- | ---- | ---- | ---- | ---- | ----- | ---- | ---- | ---- | --------- | ------- |
+| OV-DINO<sup>1</sup> | O365            | 24.4 | 15.5 | 20.2 | 29.7 | 18.7  | 9.3  | 14.5 | 27.4 | 49.5 / 57.5 |  [HF CKPT🤗](https://huggingface.co/hao9610/OV-DINO/resolve/main/ovdino_swint_o-coco49.5_lvismv24.4_lvis18.7.pth)      |
+| OV-DINO<sup>2</sup> | O365,GoldG      | 39.4 | 31.5 | 38.9 | 41.3 | 32.2  | 26.2 | 30.1 | 37.3 | 50.6 / 58.4 |   [HF CKPT🤗](https://huggingface.co/hao9610/OV-DINO/resolve/main/ovdino_swint_og-coco50.6_lvismv39.4_lvis32.2.pth)      |
+| OV-DINO<sup>3</sup> | O365,GoldG,CC1M<sup>&ddagger;</sup> | 39.4 | 31.5 | 38.9 | 41.3 | 32.2  | 26.2 | 30.1 | 37.3 | 50.2 / 58.2 |   [HF CKPT🤗](https://huggingface.co/hao9610/OV-DINO/resolve/main/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth)      |
+
+ **NOTE**: AP<sup>mv</sup> denotes the zero-shot evaluation results on LVIS MiniVal, AP<sup>val</sup> denotes the zero-shot evaluation results on LVIS Val, AP<sup>coco</sup> denotes (zero-shot / fine-tune) evaluation results on COCO, respectively.
+
+## :checked_flag: Getting Started
+### 1. Project Structure
+```
+OV-DINO
+├── datas
+│   ├── coco
+│   │   ├── annotations
+│   │   ├── train2017
+│   │   └── val2017
+│   ├── lvis
+│   │   ├── annotations
+│   │   ├── train2017
+│   │   └── val2017
+│   └── custom
+│       ├── annotations
+│       ├── train
+│       └── val
+├── inits
+│   ├── huggingface
+│   ├── ovdino
+│   └── swin
+├── ovdino
+│   ├── configs
+│   ├── detectron2-717ab9
+│   ├── detrex
+│   ├── projects
+│   ├── scripts
+│   └── tools
+├── wkdrs
+│   ├── ...
+│
+```
+
+### 2. Installation
+```bash
+conda create -n ovdino -y
+conda activate ovdino
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia -y
+conda install gcc=8 gxx=8 -y # Optional install gcc8
+cd ovdino
+python -m pip install -e detectron2-717ab9
+pip install -e ./
+```
+
+### 2. Data Pre-preparing
+#### COCO
+* Download [COCO](https://cocodataset.org/#download) from the official website, and put them on datas/coco folder.
+  ```
+  wget http://images.cocodataset.org/zips/train2017.zip -O datas/coco/train2017.zip
+  wget http://images.cocodataset.org/zips/val2017.zip -O datas/coco/val2017.zip
+  wget http://images.cocodataset.org/annotations/annotations_trainval2017.zip -O datas/coco/annotations_trainval2017.zip
+  ```
+* Extract the ziped files, and remove them:
+  ```
+  unzip datas/coco/train2017.zip -d datas/coco
+  unzip datas/coco/val2017.zip -d datas/coco
+  unzip datas/coco/annotations_trainval2017.zip -d datas/coco
+  rm datas/coco/train2017.zip datas/coco/val2017.zip datas/coco/annotations_trainval2017.zip
+  ```
+
+#### LVIS
+* Download LVIS annotation files:
+  ```
+  wget https://huggingface.co/hao9610/OV-DINO/resolve/main/lvis_v1_minival_inserted_image_name.json -O datas/lvis/annotations/lvis_v1_minival_inserted_image_name.json
+  wget https://huggingface.co/hao9610/OV-DINO/resolve/main/lvis_v1_val.json -O datas/lvis/annotations/lvis_v1_val.json
+  ```
+* Soft-link COCO to LVIS:
+  ```
+  ln -s $(realpath datas/coco/train2017) datas/lvis
+  ln -s $(realpath datas/coco/val2017) datas/lvis
+  ```
+### 3. Evaluation
+Download the pre-trained model from [Model Zoo](#model-zoo), and put them on inits/ovdino directory.
+```
+cd ovdino
+sh scripts/eval.sh path_to_eval_config_file path_to_pretrained_model output_directory
+```
+
+#### Zero-Shot Evaluation on COCO Benchmark
+```
+cd ovdino
+sh scripts/eval.sh \
+  projects/ovdino/configs/ovdino_swin_tiny224_bert_base_eval_coco.py \
+  ../inits/ovdino/ovdino_swint_og-coco50.6_lvismv39.4_lvis32.2.pth \
+  ../wkdrs/eval_ovdino
+```
+#### Zero-Shot Evaluation on LVIS Benchmark
+```
+cd ovdino
+sh scripts/eval.sh \
+  projects/ovdino/configs/ovdino_swin_tiny224_bert_base_eval_lvismv.py \
+  ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth \
+  ../wkdrs/eval_ovdino
+
+sh scripts/eval.sh \
+  projects/ovdino/configs/ovdino_swin_tiny224_bert_base_eval_lvis.py \
+  ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth \
+  ../wkdrs/eval_ovdino
+```
+
+### 4. Fine-Tuning
+#### Fine-Tuning on COCO Dataset
+```
+cd ovdino
+sh scripts/train.sh \
+  projects/ovdino/configs/ovdino_swin_tiny224_bert_base_ft_coco_24ep.py \
+  ../inits/ovdino/ovdino_swint_og-coco50.6_lvismv39.4_lvis32.2.pth
+```
+
+#### Fine-Tuning on Custom Dataset
+* Prepare your custom dataset as the COCO annotation format.
+
+* Refer the following command to run fine-tuning.
+```
+cd ovdino
+sh scripts/train.sh \
+  projects/ovdino/configs/ovdino_swin_tiny224_bert_base_ft_custom_24ep.py \
+  ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth
+```
+
+## :white_check_mark: TODO
+- [x] Release the pre-trained model.
+- [x] Release the fine-tuning and evaluation code.
 - [ ] Support the local inference demo.
 - [ ] Support the web demo.
 - [ ] Release the pre-training code.
 
-## Citation
+## :blush: Acknowledge
+This project has referenced some excellent open-sourced repos ([Detectron2](), [detrex](), [GLIP](), [G-DINO](), [YOLO-World](https://github.com/AILab-CVC/YOLO-World)). Thanks for their wonderful works and contributions to the community.
+
+## :pushpin: Citation
 If you find OV-DINO is helpful for your research or applications, please consider giving us a star 🌟 and citing it by the following BibTex entry.
 
 ```bibtex
-@article{wang2024ovdino,
+@article{wanghao2024ovdino,
   title={OV-DINO: Unified Open-Vocabulary Detection with Language-Aware Selective Fusion}, 
   author={Hao Wang and Pengzhen Ren and Zequn Jie and Xiao Dong and Chengjian Feng and Yinlong Qian and Lin Ma and Dongmei Jiang and Yaowei Wang and Xiangyuan Lan and Xiaodan Liang},
   journal={arXiv preprint arXiv:2407.07844},
