@@ -195,7 +195,7 @@ sh scripts/train.sh \
 - [ ] Release the pre-training code.
 
 ## :blush: Acknowledge
-This project has referenced some excellent open-sourced repos ([Detectron2](), [detrex](), [GLIP](), [G-DINO](), [YOLO-World](https://github.com/AILab-CVC/YOLO-World)). Thanks for their wonderful works and contributions to the community.
+This project has referenced some excellent open-sourced repos ([Detectron2](https://github.com/facebookresearch/detectron2), [detrex](https://github.com/IDEA-Research/detrex), [GLIP](), [G-DINO](https://github.com/IDEA-Research/GroundingDINO), [YOLO-World](https://github.com/AILab-CVC/YOLO-World)). Thanks for their wonderful works and contributions to the community.
 
 ## :pushpin: Citation
 If you find OV-DINO is helpful for your research or applications, please consider giving us a star 🌟 and citing it by the following BibTex entry.
