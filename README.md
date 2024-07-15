@@ -44,7 +44,7 @@ This project contains the official PyTorch implementation, pre-trained models, f
 
  **NOTE**: AP<sup>mv</sup> denotes the zero-shot evaluation results on LVIS MiniVal, AP<sup>val</sup> denotes the zero-shot evaluation results on LVIS Val, AP<sup>coco</sup> denotes (zero-shot / fine-tune) evaluation results on COCO, respectively.
 
-## :checked_flag: Getting Started
+## :checkered_flag: Getting Started
 ### 1. Project Structure
 ```
 OV-DINO
