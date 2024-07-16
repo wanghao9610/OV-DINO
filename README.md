@@ -201,7 +201,7 @@ sh scripts/train.sh \
   sh scripts/demo.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_infer_demo.py \
     ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth \
-    "class0 long_class1 long_class2 ..." input_dir output_dir
+    "class0 long_class1 long_class2 ..." image_dir output_dir
   ```
   NOTE: the input category_names are separated by spaces, and the words of single class are connected by underline (_).
 
