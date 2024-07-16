@@ -106,7 +106,7 @@ if __name__ == "__main__":
 
         return visualized_output.get_image()[:, :, ::-1]
 
-    image = gr.inputs.Image(shape=(512, 512))
+    image = gr.inputs.Image()
 
     title_markdown = """
     # 🦖 OV-DINO: Unified Open-Vocabulary Detection with Language-Aware Selective Fusion
