@@ -142,7 +142,7 @@ if __name__ == "__main__":
             ],
             [
                 "./demo/imgs/000000017714.jpg",
-                "cup spoon pizza knife fork bowl",
+                "cup spoon pizza knife fork dish",
             ],
         ],
         article=message_markdown,
