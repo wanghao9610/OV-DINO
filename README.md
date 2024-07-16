@@ -111,7 +111,7 @@ pip install -e ./
 * Download LVIS annotation files:
   ```bash
   wget https://huggingface.co/hao9610/OV-DINO/resolve/main/lvis_v1_minival_inserted_image_name.json -O datas/lvis/annotations/lvis_v1_minival_inserted_image_name.json
-  wget https://huggingface.co/hao9610/OV-DINO/resolve/main/lvis_v1_val.json -O datas/lvis/annotations/lvis_v1_val.json
+  wget https://huggingface.co/hao9610/OV-DINO/resolve/main/lvis_v1_val_inserted_image_name.json -O datas/lvis/annotations/lvis_v1_val_inserted_image_name.json
   ```
 * Soft-link COCO to LVIS:
   ```bash
