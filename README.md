@@ -92,7 +92,7 @@ cd $root_dir/ovdino
 conda create -n ovdino -y
 conda activate ovdino
 conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia -y
-conda install gcc=8 gxx=8 -y # Optional install gcc8
+conda install gcc=8 gxx=8 -c conda-forge -y # Optional install gcc8
 python -m pip install -e detectron2-717ab9
 pip install -e ./
 ```
