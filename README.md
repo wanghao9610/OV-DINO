@@ -82,25 +82,33 @@ OV-DINO
 
 ### 2. Installation
 ```bash
+# clone this project
+git clone https://github.com/wanghao9610/OV-DINO.git
+cd OV-DINO
+export root_dir=$(realpath ./)
+cd $root_dir/ovdino
+
+# create conda env
 conda create -n ovdino -y
 conda activate ovdino
 conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia -y
 conda install gcc=8 gxx=8 -y # Optional install gcc8
-cd ovdino
 python -m pip install -e detectron2-717ab9
 pip install -e ./
 ```
 
-### 2. Data Pre-preparing
+### 2. Data Preparing
 #### COCO
 * Download [COCO](https://cocodataset.org/#download) from the official website, and put them on datas/coco folder.
   ```bash
+  cd $root_dir
   wget http://images.cocodataset.org/zips/train2017.zip -O datas/coco/train2017.zip
   wget http://images.cocodataset.org/zips/val2017.zip -O datas/coco/val2017.zip
   wget http://images.cocodataset.org/annotations/annotations_trainval2017.zip -O datas/coco/annotations_trainval2017.zip
   ```
 * Extract the ziped files, and remove them:
   ```bash
+  cd $root_dir
   unzip datas/coco/train2017.zip -d datas/coco
   unzip datas/coco/val2017.zip -d datas/coco
   unzip datas/coco/annotations_trainval2017.zip -d datas/coco
@@ -110,24 +118,26 @@ pip install -e ./
 #### LVIS
 * Download LVIS annotation files:
   ```bash
+  cd $root_dir
   wget https://huggingface.co/hao9610/OV-DINO/resolve/main/lvis_v1_minival_inserted_image_name.json -O datas/lvis/annotations/lvis_v1_minival_inserted_image_name.json
   wget https://huggingface.co/hao9610/OV-DINO/resolve/main/lvis_v1_val_inserted_image_name.json -O datas/lvis/annotations/lvis_v1_val_inserted_image_name.json
   ```
 * Soft-link COCO to LVIS:
   ```bash
+  cd $root_dir
   ln -s $(realpath datas/coco/train2017) datas/lvis
   ln -s $(realpath datas/coco/val2017) datas/lvis
   ```
 ### 3. Evaluation
 Download the pre-trained model from [Model Zoo](#model-zoo), and put them on inits/ovdino directory.
 ```bash
-cd ovdino
+cd $root_dir/ovdino
 sh scripts/eval.sh path_to_eval_config_file path_to_pretrained_model output_directory
 ```
 
 #### Zero-Shot Evaluation on COCO Benchmark
 ```bash
-cd ovdino
+cd $root_dir/ovdino
 sh scripts/eval.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_eval_coco.py \
   ../inits/ovdino/ovdino_swint_og-coco50.6_lvismv39.4_lvis32.2.pth \
@@ -135,7 +145,7 @@ sh scripts/eval.sh \
 ```
 #### Zero-Shot Evaluation on LVIS Benchmark
 ```bash
-cd ovdino
+cd $root_dir/ovdino
 sh scripts/eval.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_eval_lvismv.py \
   ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth \
@@ -150,7 +160,7 @@ sh scripts/eval.sh \
 ### 4. Fine-Tuning
 #### Fine-Tuning on COCO Dataset
 ```bash
-cd ovdino
+cd $root_dir/ovdino
 sh scripts/train.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_ft_coco_24ep.py \
   ../inits/ovdino/ovdino_swint_og-coco50.6_lvismv39.4_lvis32.2.pth
@@ -161,7 +171,7 @@ sh scripts/train.sh \
 
 * Refer the following command to run fine-tuning.
   ```bash
-  cd ovdino
+  cd $root_dir/ovdino
   sh scripts/train.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_ft_custom_24ep.py \
     ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth
@@ -169,12 +179,12 @@ sh scripts/train.sh \
 ## :computer: Demo
 * Local inference on a image or folder give the category names.
   ```bash
-  cd ovdino
+  cd $root_dir/ovdino
   sh scripts/demo.sh demo_config.py pretrained_model category_names input_images_or_directory output_directory
   ```
   Examples:
   ```bash
-  cd ovdino
+  cd $root_dir/ovdino
   # single image inference
   sh scripts/demo.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_infer_demo.py \
