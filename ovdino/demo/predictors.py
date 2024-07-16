@@ -1,14 +1,11 @@
 import atexit
 import bisect
 import multiprocessing as mp
-from collections import deque
 from copy import copy
 
-import cv2
 import detectron2.data.transforms as T
 import torch
 from detectron2.data import MetadataCatalog
-from detectron2.utils.video_visualizer import VideoVisualizer
 from detectron2.utils.visualizer import ColorMode, Visualizer
 
 
@@ -21,7 +18,7 @@ def filter_predictions_with_confidence(predictions, confidence_threshold=0.5):
     return predictions
 
 
-class VisualizationDemo(object):
+class OVDINODemo(object):
     def __init__(
         self,
         model,
@@ -29,7 +26,6 @@ class VisualizationDemo(object):
         max_size_test=1333,
         img_format="RGB",
         metadata_dataset="coco_2017_val",
-        category_names=None,
         instance_mode=ColorMode.IMAGE,
         parallel=False,
     ):
@@ -41,7 +37,6 @@ class VisualizationDemo(object):
                 Useful since the visualization logic can be slow.
         """
         self.metadata = {}
-        self.metadata["thing_classes"] = category_names
 
         self.cpu_device = torch.device("cpu")
         self.instance_mode = instance_mode
@@ -81,7 +76,8 @@ class VisualizationDemo(object):
         predictions = filter_predictions_with_confidence(predictions, threshold)
         # Convert image from OpenCV BGR format to Matplotlib RGB format.
         image = image[:, :, ::-1]
-        visualizer = Visualizer(image, self.metadata, instance_mode=self.instance_mode)
+        metadata = {"thing_classes": category_names}
+        visualizer = Visualizer(image, metadata, instance_mode=self.instance_mode)
         if "panoptic_seg" in predictions:
             panoptic_seg, segments_info = predictions["panoptic_seg"]
             vis_output = visualizer.draw_panoptic_seg_predictions(
@@ -97,72 +93,6 @@ class VisualizationDemo(object):
                 vis_output = visualizer.draw_instance_predictions(predictions=instances)
 
         return predictions, vis_output
-
-    def _frame_from_video(self, video):
-        while video.isOpened():
-            success, frame = video.read()
-            if success:
-                yield frame
-            else:
-                break
-
-    def run_on_video(self, video, threshold=0.5):
-        """
-        Visualizes predictions on frames of the input video.
-
-        Args:
-            video (cv2.VideoCapture): a :class:`VideoCapture` object, whose source can be
-                either a webcam or a video file.
-
-        Yields:
-            ndarray: BGR visualizations of each video frame.
-        """
-        video_visualizer = VideoVisualizer(self.metadata, self.instance_mode)
-
-        def process_predictions(frame, predictions, threshold):
-            predictions = filter_predictions_with_confidence(predictions, threshold)
-            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            if "panoptic_seg" in predictions:
-                panoptic_seg, segments_info = predictions["panoptic_seg"]
-                vis_frame = video_visualizer.draw_panoptic_seg_predictions(
-                    frame, panoptic_seg.to(self.cpu_device), segments_info
-                )
-            elif "instances" in predictions:
-                predictions = predictions["instances"].to(self.cpu_device)
-                vis_frame = video_visualizer.draw_instance_predictions(
-                    frame, predictions
-                )
-            elif "sem_seg" in predictions:
-                vis_frame = video_visualizer.draw_sem_seg(
-                    frame, predictions["sem_seg"].argmax(dim=0).to(self.cpu_device)
-                )
-
-            # Converts Matplotlib RGB format to OpenCV BGR format
-            vis_frame = cv2.cvtColor(vis_frame.get_image(), cv2.COLOR_RGB2BGR)
-            return vis_frame
-
-        frame_gen = self._frame_from_video(video)
-        if self.parallel:
-            buffer_size = self.predictor.default_buffer_size
-
-            frame_data = deque()
-
-            for cnt, frame in enumerate(frame_gen):
-                frame_data.append(frame)
-                self.predictor.put(frame)
-
-                if cnt >= buffer_size:
-                    frame = frame_data.popleft()
-                    predictions = self.predictor.get()
-                    yield process_predictions(frame, predictions, threshold)
-
-            while len(frame_data):
-                frame = frame_data.popleft()
-                predictions = self.predictor.get()
-                yield process_predictions(frame, predictions, threshold)
-        else:
-            for frame in frame_gen:
-                yield process_predictions(frame, self.predictor(frame), threshold)
 
 
 class DefaultPredictor:

@@ -3,7 +3,6 @@ import argparse
 import glob
 import multiprocessing as mp
 import os
-import re
 import sys
 import tempfile
 import time
@@ -14,7 +13,7 @@ import numpy as np
 import tqdm
 
 sys.path.insert(0, "./")  # noqa
-from demo.predictors import VisualizationDemo
+from demo.predictors import OVDINODemo
 from detectron2.checkpoint import DetectionCheckpointer
 from detectron2.config import LazyConfig, instantiate
 from detectron2.data.detection_utils import read_image
@@ -134,13 +133,13 @@ if __name__ == "__main__":
     category_names = args.category_names
     category_names = [clean_words_or_phrase(cat_name) for cat_name in category_names]
 
-    demo = VisualizationDemo(
+    demo = OVDINODemo(
         model=model,
         min_size_test=args.min_size_test,
         max_size_test=args.max_size_test,
         img_format=args.img_format,
         metadata_dataset=args.metadata_dataset,
-        category_names=category_names,
+        # category_names=category_names,
     )
 
     if args.input:

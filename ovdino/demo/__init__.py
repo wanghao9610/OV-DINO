@@ -1,1 +1,1 @@
-from .predictors import VisualizationDemo
+from .predictors import OVDINODemo

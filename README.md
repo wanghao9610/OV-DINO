@@ -16,6 +16,10 @@
 
 ## :fire: Updates
 
+- **`16/07/2024`**: We provide the [online demo](http://120.76.142.206:7860), **CLICK** !!!
+
+- **`16/07/2024`**: We release the web inference demo, try to deploy it by yourself.
+
 - **`15/07/2024`**: We release the fine-tuning code, try to fine-tune on your custom dataset. Feel free to raise issue if you encounter some problem.
 
 - **`15/07/2024`**: We release the local inference demo, try to deploy OV-DINO on you local machine and run inference on images.
@@ -205,13 +209,24 @@ sh scripts/train.sh \
   ```
   NOTE: the input category_names are separated by spaces, and the words of single class are connected by underline (_).
 
-* Web inference demo. Coming soon.
+* Web inference demo.
+
+  ```bash
+  cd $root_dir/ovdino
+  sh scripts/app.sh \
+    projects/ovdino/configs/ovdino_swin_tiny224_bert_base_infer_demo.py \
+    ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth
+  ```
+
+  After the web demo deployment, you can open the [demo](http://127.0.0.1:7860) on your browser.
+
+  **We also provide the [online demo](http://120.76.142.206:7860), CLICK it and Enjoy.**
 
 ## :white_check_mark: TODO
 - [x] Release the pre-trained model.
 - [x] Release the fine-tuning and evaluation code.
 - [x] Support the local inference demo.
-- [ ] Support the web inference demo.
+- [x] Support the web inference demo.
 - [ ] Release the pre-training code.
 
 ## :blush: Acknowledge

@@ -62,6 +62,7 @@ class OVDINO(nn.Module):
         vis_period: int = 0,
         text_embed_dim: int = 768,
         inference_template: str = "identity",
+        app_mode: bool = False,
     ):
         super().__init__()
         # define backbone and position embedding module
@@ -149,6 +150,7 @@ class OVDINO(nn.Module):
         self.last_state = None
         # the template for inference.
         self.inference_template = inference_template
+        self.app_mode = app_mode
 
     def reset_text_embed_dict(self):
         self.text_embed_dict = defaultdict()
@@ -202,13 +204,13 @@ class OVDINO(nn.Module):
         # original features
         features = self.backbone(images.tensor)  # output feature dict
 
-        # inference with much templates.
+        # inference with many templates
         if not self.training:
             if last_state == "train":
                 self.reset_text_embed_dict()
                 self.last_state = "eval"
 
-            if self.text_embed_dict.get(chunk_index, None) is None:
+            if self.text_embed_dict.get(chunk_index, None) is None or self.app_mode:
                 if isinstance(names[0], list):
                     text_embed = torch.stack(
                         [self.language_backbone(name) for name in names], dim=0
@@ -621,7 +623,7 @@ class OVDINO(nn.Module):
         # box_pred.shape: 1, 300, 4
         prob = box_cls.sigmoid()
         # follow glip(ref: https://github.com/microsoft/GLIP/blob/a5f302bfd4c5c67010e29f779e3b0bde94e89985/maskrcnn_benchmark/modeling/rpn/inference.py#L510).
-        # We perform sqrt of cls_prob to obtain more larger probability for visualization.
+        # We perform sqrt of cls_prob to obtain more larger probility for visulization.
         prob = torch.sqrt(prob)
         topk_values, topk_indexes = torch.topk(
             prob.view(box_cls.shape[0], -1), self.select_box_nums_for_evaluation, dim=1
