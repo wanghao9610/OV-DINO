@@ -10,13 +10,13 @@
 
 <sup>:email:</sup> corresponding author.
 
-[[`Paper`](https://arxiv.org/abs/2407.07844)] [[`HuggingFace`](https://huggingface.co/hao9610/OV-DINO)] [[`BibTex`](#pushpin-citation)]
+[[`Paper`](https://arxiv.org/abs/2407.07844)] [[`HuggingFace`](https://huggingface.co/hao9610/OV-DINO)] [[`Demo`](http://47.115.200.157:7860)] [[`BibTex`](#pushpin-citation)]
 
 </div>
 
 ## :fire: Updates
 
-- **`16/07/2024`**: We provide the [online demo](https://47.115.200.157:7860), **CLICK** !!!
+- **`16/07/2024`**: We provide the [online demo](http://47.115.200.157:7860), **CLICK** !!!
 
 - **`16/07/2024`**: We release the web inference demo, try to deploy it by yourself.
 
@@ -220,7 +220,7 @@ sh scripts/train.sh \
 
   After the web demo deployment, you can open the [demo](http://127.0.0.1:7860) on your browser.
 
-  **We also provide the [online demo](https://47.115.200.157:7860), CLICK it and Enjoy.**
+  **We also provide the [online demo](http://47.115.200.157:7860), CLICK it and Enjoy.**
 
 ## :white_check_mark: TODO
 - [x] Release the pre-trained model.
