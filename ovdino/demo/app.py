@@ -134,7 +134,7 @@ if __name__ == "__main__":
             ),
         ],
         examples=[
-            ["./demo/imgs/000000001584.jpg", "bus person licence_plate"],
+            ["./demo/imgs/000000001584.jpg", "bus person license_plate"],
             ["./demo/imgs/000000004495.jpg", "person tv couch chair"],
             [
                 "./demo/imgs/000000009483.jpg",
@@ -142,7 +142,7 @@ if __name__ == "__main__":
             ],
             [
                 "./demo/imgs/000000017714.jpg",
-                "dinning_table cup spoon pizza knife fork dish bowl",
+                "cup spoon pizza knife fork bowl",
             ],
         ],
         article=messeage_markdown,
