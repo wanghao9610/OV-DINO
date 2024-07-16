@@ -109,14 +109,14 @@ if __name__ == "__main__":
     image = gr.inputs.Image(shape=(512, 512))
 
     title_markdown = """
-    # 🦖 OV-DINO: Unifiedcabulary Detection with Language-Aware Selective Fusion
+    # 🦖 OV-DINO: Unified Open-Vocabulary Detection with Language-Aware Selective Fusion
     """
 
-    messeage_markdown = """
-    This is a demo of **OV-DINO: Unifiedcabulary Detection with Language-Aware Selective Fusion**. 
+    message_markdown = """
+    This is a demo of **OV-DINO: Open-Vocabulary Detection with Language-Aware Selective Fusion**. 
     
     The model takes image and text as input, and outputs the detection results.
-    The text input is a list of categorie names, the input category_names are separated by spaces, and the words of single class are connected by underline (_).
+    The text input is a list of category names, the input category_names are separated by spaces, and the words of single class are connected by underline (_).
     
     Paper: https://arxiv.org/abs/2407.07844
     
@@ -145,5 +145,5 @@ if __name__ == "__main__":
                 "cup spoon pizza knife fork bowl",
             ],
         ],
-        article=messeage_markdown,
+        article=message_markdown,
     ).launch()
