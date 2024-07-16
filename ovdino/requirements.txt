@@ -1,6 +1,7 @@
 lvis
 ipython
 transformers==4.30.2
+termcolor==2.0.1
 pillow==9.2.0
 cloudpickle
 hydra-core
