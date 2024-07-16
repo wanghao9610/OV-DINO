@@ -1,5 +1,5 @@
 <div align="center">
-<h1>OV-DINO </h1>
+<h1>🦖OV-DINO </h1>
 <h3>Unified Open-Vocabulary Detection with Language-Aware Selective Fusion</h3>
 
 [Hao Wang](https://github.com/wanghao9610)<sup>1,2</sup>,[Pengzhen Ren](https://scholar.google.com/citations?user=yVxSn70AAAAJ&hl)<sup>1</sup>,[Zequn Jie](https://scholar.google.com/citations?user=4sKGNB0AAAAJ&hl)<sup>3</sup>, [Xiao Dong](https://scholar.google.com.sg/citations?user=jXLkbw8AAAAJ&hl)<sup>1</sup>, [Chengjian Feng](https://fcjian.github.io/)<sup>3</sup>, [Yinlong Qian](https://scholar.google.com/citations?user=8tPN5CAAAAAJ&hl)<sup>3</sup>,
