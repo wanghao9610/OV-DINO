@@ -46,7 +46,7 @@ This project contains the official PyTorch implementation, pre-trained models, f
 | -------- | --------------- | ---- | ---- | ---- | ---- | ----- | ---- | ---- | ---- | --------- | ------- |
 | OV-DINO<sup>1</sup> | O365            | 24.4 | 15.5 | 20.2 | 29.7 | 18.7  | 9.3  | 14.5 | 27.4 | 49.5 / 57.5 |  [HF CKPT🤗](https://huggingface.co/hao9610/OV-DINO/resolve/main/ovdino_swint_o-coco49.5_lvismv24.4_lvis18.7.pth)      |
 | OV-DINO<sup>2</sup> | O365,GoldG      | 39.4 | 31.5 | 38.9 | 41.3 | 32.2  | 26.2 | 30.1 | 37.3 | 50.6 / 58.4 |   [HF CKPT🤗](https://huggingface.co/hao9610/OV-DINO/resolve/main/ovdino_swint_og-coco50.6_lvismv39.4_lvis32.2.pth)      |
-| OV-DINO<sup>3</sup> | O365,GoldG,CC1M<sup>&ddagger;</sup> | 40.0 | 34.6 | 39.5 | 41.5 | 32.9  | 29.1 | 30.4 | 37.4 | 50.2 / 58.2 |   [HF CKPT🤗](https://huggingface.co/hao9610/OV-DINO/resolve/main/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth)      |
+| OV-DINO<sup>3</sup> | O365,GoldG,CC1M<sup>&ddagger;</sup> | 40.1 | 34.5 | 39.5 | 41.5 | 32.9  | 29.1 | 30.4 | 37.4 | 50.2 / 58.2 |   [HF CKPT🤗](https://huggingface.co/hao9610/OV-DINO/resolve/main/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth)      |
 
  **NOTE**: AP<sup>mv</sup> denotes the zero-shot evaluation results on LVIS MiniVal, AP<sup>val</sup> denotes the zero-shot evaluation results on LVIS Val, AP<sup>coco</sup> denotes (zero-shot / fine-tune) evaluation results on COCO, respectively.
 
@@ -152,12 +152,12 @@ sh scripts/eval.sh \
 cd $root_dir/ovdino
 sh scripts/eval.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_eval_lvismv.py \
-  ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth \
+  ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth \
   ../wkdrs/eval_ovdino
 
 sh scripts/eval.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_eval_lvis.py \
-  ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth \
+  ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth \
   ../wkdrs/eval_ovdino
 ```
 
@@ -178,7 +178,7 @@ sh scripts/train.sh \
   cd $root_dir/ovdino
   sh scripts/train.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_ft_custom_24ep.py \
-    ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth
+    ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth
   ```
 ## :computer: Demo
 * Local inference on a image or folder give the category names.
@@ -192,19 +192,19 @@ sh scripts/train.sh \
   # single image inference
   sh scripts/demo.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_infer_demo.py \
-    ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth \
+    ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth \
     "class0 class1 class2 ..." img0.jpg output_dir/img0_vis.jpg
 
   # multi images inference
   sh scripts/demo.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_infer_demo.py \
-    ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth \
+    ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth \
     "class0 long_class1 long_class2 ..." "img0.jpg img1.jpg" output_dir
 
   # image folder inference
   sh scripts/demo.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_infer_demo.py \
-    ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth \
+    ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth \
     "class0 long_class1 long_class2 ..." image_dir output_dir
   ```
   NOTE: the input category_names are separated by spaces, and the words of single class are connected by underline (_).
@@ -215,7 +215,7 @@ sh scripts/train.sh \
   cd $root_dir/ovdino
   sh scripts/app.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_infer_demo.py \
-    ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.0_lvis32.9.pth
+    ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth
   ```
 
   After the web demo deployment, you can open the [demo](http://127.0.0.1:7860) on your browser.
