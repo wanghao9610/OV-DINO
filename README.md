@@ -236,7 +236,7 @@ This project has referenced some excellent open-sourced repos ([Detectron2](http
 If you find OV-DINO is helpful for your research or applications, please consider giving us a star 🌟 and citing it by the following BibTex entry.
 
 ```bibtex
-@article{wanghao2024ovdino,
+@article{wang2024ovdino,
   title={OV-DINO: Unified Open-Vocabulary Detection with Language-Aware Selective Fusion}, 
   author={Hao Wang and Pengzhen Ren and Zequn Jie and Xiao Dong and Chengjian Feng and Yinlong Qian and Lin Ma and Dongmei Jiang and Yaowei Wang and Xiangyuan Lan and Xiaodan Liang},
   journal={arXiv preprint arXiv:2407.07844},
