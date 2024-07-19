@@ -1,19 +1,21 @@
 # Copyright (c) Facebook, Inc. and its affiliates.
 import argparse
 import multiprocessing as mp
+import os
 import sys
 
 import gradio as gr
+import numpy as np
 
 sys.path.insert(0, "./")  # noqa
 from demo.predictors import OVDINODemo
 from detectron2.checkpoint import DetectionCheckpointer
 from detectron2.config import LazyConfig, instantiate
+from detectron2.data import MetadataCatalog
 from detectron2.utils.logger import setup_logger
 from detrex.data.datasets import clean_words_or_phrase
 
-# constants
-WINDOW_NAME = "COCO detections"
+this_dir = os.path.dirname(os.path.abspath(__file__))
 
 
 def setup(args):
@@ -95,55 +97,84 @@ if __name__ == "__main__":
         metadata_dataset=args.metadata_dataset,
     )
 
-    def gradio_predict(image, text):
-        category_names = text.split(" ")
+    def gradio_predict(image, text, score_thr):
+        category_names = text.split(", ")
         category_names = [
             clean_words_or_phrase(cat_name) for cat_name in category_names
         ]
-        _, visualized_output = demo.run_on_image(
-            image, category_names, args.confidence_threshold
-        )
+        image = np.array(image)
+        _, visualized_output = demo.run_on_image(image, category_names, score_thr)
 
         return visualized_output.get_image()[:, :, ::-1]
 
-    image = gr.inputs.Image()
-
-    title_markdown = """
-    # 🦖 OV-DINO: Unified Open-Vocabulary Detection with Language-Aware Selective Fusion
-    """
-
-    message_markdown = """
-    This is a demo of **OV-DINO: Open-Vocabulary Detection with Language-Aware Selective Fusion**. 
-    
-    The model takes image and text as input, and outputs the detection results.
-    The text input is a list of category names, the input category_names are separated by spaces, and the words of single class are connected by underline (_).
-    
-    Paper: https://arxiv.org/abs/2407.07844
-    
-    Code: https://github.com/wanghao9610/OV-DINO
-    """
-
-    gr.Interface(
-        description=title_markdown,
-        fn=gradio_predict,
-        inputs=["image", "text"],
-        outputs=[
-            gr.outputs.Image(
-                type="pil",
-                # label="grounding results"
-            ),
+    examples = [
+        [
+            os.path.join(this_dir, "./imgs/000000001584.jpg"),
+            "person, bus, bicycle",
         ],
-        examples=[
-            ["./demo/imgs/000000001584.jpg", "bus person license_plate"],
-            ["./demo/imgs/000000004495.jpg", "person tv couch chair"],
-            [
-                "./demo/imgs/000000009483.jpg",
-                "person keyboard table computer_monitor computer_mouse",
-            ],
-            [
-                "./demo/imgs/000000017714.jpg",
-                "cup spoon pizza knife fork dish",
-            ],
+        [
+            os.path.join(this_dir, "./imgs/000000004495.jpg"),
+            "person, tv, couch, whiteboard",
         ],
-        article=message_markdown,
-    ).launch()
+        [
+            os.path.join(this_dir, "./imgs/000000009483.jpg"),
+            "person, keyboard, table, computer monitor, computer mouse",
+        ],
+        [
+            os.path.join(this_dir, "./imgs/000000017714.jpg"),
+            "table, cup, spoon, pizza, knife, fork, dish",
+        ],
+    ]
+
+    coco_categories = ", ".join(
+        MetadataCatalog.get(args.metadata_dataset).thing_classes
+    )
+
+    with gr.Blocks(title="OV-DINO") as app:
+        with gr.Row():
+            gr.Markdown(
+                """
+                <div align="center">
+                <h1>🦖OV-DINO </h1>
+                <h2>Unified Open-Vocabulary Detection with Language-Aware Selective Fusion</h2>
+                
+                [[`Paper`](https://arxiv.org/abs/2407.07844)] [[`Code`](https://github.com/wanghao9610/OV-DINO)]
+                </div>
+                """
+            )
+        with gr.Row():
+            with gr.Column(scale=3):
+                with gr.Row():
+                    image = gr.inputs.Image(type="pil", label="input image")
+                input_text = gr.Textbox(
+                    lines=7,
+                    label="Enter the classes to be detected, separated by comma",
+                    value=coco_categories,
+                    elem_id="textbox",
+                )
+                with gr.Row():
+                    submit = gr.Button("Submit")
+                    clear = gr.Button("Clear")
+                score_thr = gr.Slider(
+                    minimum=0,
+                    maximum=1,
+                    value=0.5,
+                    step=0.01,
+                    interactive=True,
+                    label="Score Threshold",
+                )
+            with gr.Column(scale=7):
+                output_image = gr.outputs.Image(type="pil", label="output image")
+
+        gr.Examples(examples=examples, inputs=[image, input_text], examples_per_page=10)
+        submit.click(
+            fn=gradio_predict,
+            inputs=[image, input_text, score_thr],
+            outputs=[output_image],
+        )
+        clear.click(
+            lambda: [None, coco_categories, 0.5],
+            inputs=None,
+            outputs=[image, input_text, score_thr],
+        )
+        app.launch()

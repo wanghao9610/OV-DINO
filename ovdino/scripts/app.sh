@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 # set -x
 
-# example:
-# sh scripts/app.sh demo_config.py pretrained_model
-
 # project config
 root_dir="$(realpath $(dirname $0)/../../)"
 code_dir=$root_dir/ovdino
