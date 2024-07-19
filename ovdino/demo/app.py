@@ -114,7 +114,7 @@ if __name__ == "__main__":
         ],
         [
             os.path.join(this_dir, "./imgs/000000004495.jpg"),
-            "person, tv, couch, whiteboard",
+            "person, tv, couch, whiteboard, poster",
         ],
         [
             os.path.join(this_dir, "./imgs/000000009483.jpg"),
