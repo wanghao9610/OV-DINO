@@ -145,7 +145,7 @@ if __name__ == "__main__":
         with gr.Row():
             with gr.Column(scale=3):
                 with gr.Row():
-                    image = gr.inputs.Image(type="pil", label="input image")
+                    image = gr.Image(type="pil", label="input image")
                 input_text = gr.Textbox(
                     lines=7,
                     label="Enter the classes to be detected, separated by comma",
@@ -164,7 +164,7 @@ if __name__ == "__main__":
                     label="Score Threshold",
                 )
             with gr.Column(scale=7):
-                output_image = gr.outputs.Image(type="pil", label="output image")
+                output_image = gr.Image(type="pil", label="output image")
 
         gr.Examples(examples=examples, inputs=[image, input_text], examples_per_page=10)
         submit.click(

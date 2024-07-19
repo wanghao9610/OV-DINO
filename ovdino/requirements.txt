@@ -1,7 +1,7 @@
 lvis
 ipython
 transformers==4.30.2
-gradio==3.50
+gradio==4.38.1
 pillow==9.2.0
 cloudpickle
 hydra-core
