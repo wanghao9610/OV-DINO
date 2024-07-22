@@ -227,6 +227,7 @@ sh scripts/train.sh \
 - [x] Release the fine-tuning and evaluation code.
 - [x] Support the local inference demo.
 - [x] Support the web inference demo.
+- [ ] Support OV-DINO in 🤗 transformers.
 - [ ] Release the pre-training code.
 
 ## :blush: Acknowledge
