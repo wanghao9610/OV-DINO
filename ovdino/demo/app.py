@@ -12,6 +12,7 @@ from demo.predictors import OVDINODemo
 from detectron2.checkpoint import DetectionCheckpointer
 from detectron2.config import LazyConfig, instantiate
 from detectron2.data import MetadataCatalog
+from detectron2.evaluation.coco_evaluation import instances_to_coco_json
 from detectron2.utils.logger import setup_logger
 from detrex.data.datasets import clean_words_or_phrase
 
@@ -103,9 +104,18 @@ if __name__ == "__main__":
             clean_words_or_phrase(cat_name) for cat_name in category_names
         ]
         image = np.array(image)
-        _, visualized_output = demo.run_on_image(image, category_names, score_thr)
+        predictions, visualized_output = demo.run_on_image(
+            image, category_names, score_thr
+        )
 
-        return visualized_output.get_image()[:, :, ::-1]
+        json_results = instances_to_coco_json(
+            predictions["instances"].to(demo.cpu_device), 0
+        )
+        for json_result in json_results:
+            json_result["category_name"] = category_names[json_result["category_id"]]
+            del json_result["image_id"]
+
+        return visualized_output.get_image()[:, :, ::-1], json_results
 
     examples = [
         [
@@ -167,14 +177,15 @@ if __name__ == "__main__":
                 output_image = gr.Image(type="pil", label="output image")
 
         gr.Examples(examples=examples, inputs=[image, input_text], examples_per_page=10)
+        json_results = gr.JSON(label="JSON Results")
         submit.click(
             fn=gradio_predict,
             inputs=[image, input_text, score_thr],
-            outputs=[output_image],
+            outputs=[output_image, json_results],
         )
         clear.click(
-            lambda: [None, coco_categories, 0.5],
+            lambda: [None, coco_categories, 0.5, json_results],
             inputs=None,
-            outputs=[image, input_text, score_thr],
+            outputs=[image, input_text, score_thr, json_results],
         )
-        app.launch()
+        app.launch(show_error=True)
