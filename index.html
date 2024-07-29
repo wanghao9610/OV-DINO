@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="🦖 OV-DINO: Unified Open-Vocabulary Detection with Language-Aware Selective Fusion">
+  <meta name="keywords" content="OV-DINO">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>🦖 OV-DINO: Unified Open-Vocabulary Detection with Language-Aware Selective Fusion</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <link rel="stylesheet" href="resource/css/bulma.min.css">
+  <link rel="stylesheet" href="resource/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="resource/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="resource/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="resource/css/index.css">
+  <link rel="icon" href="resource/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="resource/js/fontawesome.all.min.js"></script>
+  <script src="resource/js/bulma-carousel.min.js"></script>
+  <script src="resource/js/bulma-slider.min.js"></script>
+  <script src="resource/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body" align="center">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title"><h1>🦖 OV-DINO </h1>
+          <h3>Unified Open-Vocabulary Detection with Language-Aware Selective Fusion</h3>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://github.com/wanghao9610">Hao Wang</a><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=yVxSn70AAAAJ&hl">Pengzhen Ren<sup>1</sup></a>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=4sKGNB0AAAAJ&hl">Zequn Jie</a><sup>3</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com.sg/citations?user=jXLkbw8AAAAJ&hl">Xiao Dong</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://fcjian.github.io/">Chengjian Feng</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=8tPN5CAAAAAJ&hl">Yinlong Qian</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+                <a href="https://forestlinma.com/">Lin Ma</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=Awsue7sAAAAJ&hl">Dongmei Jiang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=o_DllmIAAAAJ&hl">Yaowei Wang</a><sup>2,4</sup>,
+            </span>
+            <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=c3iwWRcAAAAJ&hl">Xiangyuan Lan</a><sup>2</sup><sup>📧</sup>,
+              </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=voxznZAAAAAJ&hl">Xiaodan Liang</a><sup>1,2</sup><sup>📧</sup>,
+            </span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Sun Yat-Sen University,</span>
+            <span class="author-block"><sup>2</sup>Pengcheng Lab,</span>
+            <span class="author-block"><sup>3</sup>Meituan Inc,</span>
+            <span class="author-block"><sup>4</sup>HIT, Shenzhen,</span>
+            <span class="author-block"><sup>📧</sup> corresponding author.</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2407.07844"
+                    class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>[Paper] </span>
+                </a>
+              </span>
+              <!--  Arxiv Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2407.07844"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>[arXiv] </span>
+                </a>
+              </span>
+              <!--  Demo Link. -->
+              <span class="link-block">
+                <a href="http://47.115.200.157:7860"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-gamepad"></i>
+                  </span>
+                  <span>[Demo]</span>
+                  </a>
+              </span>
+              <!-- HF Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/hao9610/ov-dino-tiny"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-cube"></i>
+                  </span>
+                  <span>[HuggingFace] </span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/wanghao9610/OV-DINO"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>[Code] </span>
+                  </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- <img src="docs/demo_sample.png" alt="teaser"> -->
+      <h2 class="title is-3">Highlight</h2>
+      <ul>
+        <li> OV-DINO is a novel unified open vocabulary detection approach that offers superior performance and effectiveness for practical real-world application.</li>
+
+        <li> OV-DINO entails a Unified Data Integration pipeline that integrates diverse data sources for end-to-end pre-training, and a Language-Aware Selective Fusion module to improve the vision-language understanding of the model.</li>
+        
+        <li> OV-DINO shows significant performance improvement on COCO and LVIS benchmarks compared to previous methods, achieving relative improvements of +2.5% AP on COCO and +12.7% AP on LVIS compared to G-DINO in zero-shot evaluation.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Abstract -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Open-vocabulary detection is a challenging task due to the requirement of detecting objects based on class names, including
+            those not encountered during training. Existing methods have shown strong zero-shot detection capabilities through pre-training and
+            pseudo-labeling on diverse large-scale datasets. However, these approaches encounter two main challenges: (i) how to effectively
+            eliminate data noise from pseudo-labeling, and (ii) how to efficiently leverage the language-aware capability for region-level
+            cross-modality fusion and alignment. To address these challenges, we propose a novel unified open-vocabulary detection method called
+            OV-DINO, which is pre-trained on diverse large-scale datasets with language-aware selective fusion in a unified framework. Specifically,
+            we introduce a Unified Data Integration (UniDI) pipeline to enable end-to-end training and eliminate noise from pseudo-label generation
+            by unifying different data sources into detection-centric data format. In addition, we propose a Language-Aware Selective Fusion (LASF)
+            module to enhance the cross-modality alignment through a language-aware query selection and fusion process. We evaluate the
+            performance of the proposed OV-DINO on popular open-vocabulary detection benchmarks, achieving state-of-the-art results with an AP
+            of 50.6% on the COCO benchmark and 40.1% on the LVIS benchmark in a zero-shot manner, demonstrating its strong generalization
+            ability. Furthermore, the fine-tuned OV-DINO on COCO achieves 58.4% AP, outperforming many existing methods with the same
+            backbone.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract -->
+  </div>
+
+
+    <!-- Overview -->
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+            <h2 class="title is-3">Overview</h2>
+            <div class="content has-text-justified">
+            <img src="docs/ovdino_framework.png">
+            <div class="content has-text-justified"></div>
+                <p>
+                    The pre-training of OV-DINO comprises three primary data sources (Detection, Grounding,Image-Text). 
+                    OV-DINO has three main components: a text encoder, a image encoder, and a language-aware detection decoder. First,
+                    we process the text inputs with Unified Data Integration pipeline to ensure embedding representation consistency across these data
+                    sources. Then, the unified prompted text inputs go through a Text Encoder to extract the text embedding, and the original image inputs
+                    undergo an Image Encoder and some Encoder Layers to output the multi-scale refined image embedding. Subsequently, we employ
+                    the Language-Aware Query Selection to select the most relevant image embedding with the text embedding as the object embedding.
+                    The selected object embedding and the learnable content queries go through the Language-Aware Decoder to fuse the content queries
+                    dynamically. Finally, OV-DINO outputs the classification scores by calculating the similarity of the projected query embedding with the
+                    text embedding through region-text alignment, and the regressed bounding boxes via an MLP layer.
+                </p>
+            </div>
+            </div>
+        </div>
+        </div>
+        <!--/ Overview -->
+    </div>
+
+    <!-- Experiments -->
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+            <h2 class="title is-3">Results</h2>
+        </div>
+        </div>
+        <!--/ Results -->
+    </div>
+
+    <!-- Results on LVIS -->
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+            <h3 class="title is-3">Results on LVIS</h3>
+            <img src="docs/lvis_results.png">
+        </div>
+        </div>
+        <!--/ Results on LVIS -->
+    </div>
+
+    <!-- Results on COCO -->
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+            <h3 class="title is-3">Results on COCO</h3>
+            <img src="docs/coco_results.png">
+        </div>
+        </div>
+        <!--/ Results on COCO -->
+    </div>
+
+    <!-- Demo -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Online Demo</h2>
+        <div class="content has-text-justified">  
+          </iframe>
+          <p>
+            We provide the <a href="http://47.115.200.157:7860"> online demo</a>, click and enjoy !!!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Acknowledgement -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Acknowledgement</h2>
+        <div class="content has-text-justified">
+          <p>
+            This project has referenced some excellent open-sourced repos <a href="https://github.com/facebookresearch/detectron2">Detectron2</a>, <a href="https://github.com/IDEA-Research/detrex"> detrex </a>, <a href="https://github.com/microsoft/GLIP">GLIP </a>, <a href="https://github.com/IDEA-Research/GroundingDINO"> G-DINO </a>, <a href="https://github.com/AILab-CVC/YOLO-World"> YOLO-World </a>. Thanks for their wonderful works and contributions to the community.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- "BibTeX -->
+
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+        @article{wang2024ovdino,
+            title={OV-DINO: Unified Open-Vocabulary Detection with Language-Aware Selective Fusion}, 
+            author={Hao Wang and Pengzhen Ren and Zequn Jie and Xiao Dong and Chengjian Feng and Yinlong Qian and Lin Ma and Dongmei Jiang and Yaowei Wang and Xiangyuan Lan and Xiaodan Liang},
+            journal={arXiv preprint arXiv:2407.07844},
+            year={2024}
+        }
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="http://arxiv.org/abs/2407.15886" class="external-link" disabled>
+        <i class="ai ai-arxiv"></i>
+      </a>
+      <a class="icon-link" href="https://arxiv.org/pdf/2407.15886">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="http://120.76.142.206:8888" class="external-link" disabled>
+        <i class="fas fa-gamepad"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/Zheng-Chong/CatVTON" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+
+      <a class="icon-link" href="https://huggingface.co/zhengchong/CatVTON" class="external-link" disabled>
+        <i class="fas fa-cube"></i>
+      </a>
+      
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is modified from <a href="https://nerfies.github.io/">Nerfies</a>. Thanks for the great work!
+            Their source code is available on <a href="https://github.com/nerfies/nerfies.github.io">GitHub</a>.
+         </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
