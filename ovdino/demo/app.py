@@ -145,10 +145,10 @@ if __name__ == "__main__":
             gr.Markdown(
                 """
                 <div align="center">
-                <h1>🦖OV-DINO </h1>
+                <h1>🦖 OV-DINO </h1>
                 <h2>Unified Open-Vocabulary Detection with Language-Aware Selective Fusion</h2>
                 
-                [[`Paper`](https://arxiv.org/abs/2407.07844)] [[`Code`](https://github.com/wanghao9610/OV-DINO)]
+                [[`Paper`](https://arxiv.org/abs/2407.07844)] [[`HuggingFace`](https://huggingface.co/hao9610/ov-dino-tiny)] [[`Website`](https://wanghao9610.github.io/OV-DINO)]
                 </div>
                 """
             )
