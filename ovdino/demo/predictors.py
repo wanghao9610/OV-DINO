@@ -67,7 +67,7 @@ class OVDINODemo(object):
     def sam_infer_from_instances(self, image, instances):
         self.sam_predictor.set_image(image)
         boxes = instances.pred_boxes.tensor.detach().numpy()
-        if boxes.shape == 0:
+        if boxes.shape[0] == 0:
             return instances
 
         masks, scores, _ = self.sam_predictor.predict(
@@ -78,6 +78,8 @@ class OVDINODemo(object):
         )
         # update pred_masks in instances
         # masks shape: (batch_size) x (num_predicted_masks_per_input) x H x W
+        if masks.ndim == 3:
+            masks = masks[None, :]
         masks = masks.squeeze(1)
         instances.pred_masks = masks
 
