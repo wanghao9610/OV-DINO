@@ -180,6 +180,14 @@ if __name__ == "__main__":
                 
                 [[`Website`](https://wanghao9610.github.io/OV-DINO)] [[`Paper`](https://arxiv.org/abs/2407.07844)] [[`HuggingFace`](https://huggingface.co/hao9610/ov-dino-tiny)] [[`Code`](https://github.com/wanghao9610/OV-DINO)]
                 </div>
+                <div align="left">
+                <h2>Instructions</h2>
+                <h3>
+                <ul>
+                <li> OV-DINO detects objects in images based on the classes you provided.</li>
+                <li> OV-SAM marries OV-DINO with SAM2 for better segmentation.</li>
+                </h3>
+                </div>
                 """
             )
         with gr.Row():
