@@ -96,11 +96,22 @@ cd OV-DINO
 export root_dir=$(realpath ./)
 cd $root_dir/ovdino
 
-# create conda env
+# create conda env for ov-dino
 conda create -n ovdino -y
 conda activate ovdino
 conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia -y
-conda install gcc=8 gxx=8 -c conda-forge -y # Optional install gcc8
+conda install gcc=9 gxx=9 -c conda-forge -y # Optional: install gcc9
+python -m pip install -e detectron2-717ab9
+pip install -e ./
+
+# Optional: create conda env for ov-sam, it may not compatible with ov-dino, so we create a new env.
+# ov-sam = ov-dino + sam2
+conda create -n ovsam -y
+conda activate ovsam
+conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 pytorch-cuda=12.1 -c pytorch -c nvidia -y
+# install the sam2 following the sam2 project.
+# please refer to https://github.com/facebookresearch/segment-anything-2.git
+# download sam2 checkpoints and put them to inits/sam2
 python -m pip install -e detectron2-717ab9
 pip install -e ./
 ```
