@@ -12,7 +12,7 @@ black==22.3.0
 autoflake
 timm
 pytest
-scipy==1.7.3
+scipy
 psutil
 opencv-python
 wandb
