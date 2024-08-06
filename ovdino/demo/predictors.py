@@ -114,6 +114,7 @@ class OVDINODemo(object):
                 # Add the mask prediction from the box predictions using SAM.
                 if self.sam_predictor is not None and with_segmentation:
                     instances = self.sam_infer_from_instances(image.copy(), instances)
+                    predictions["instances"] = instances
                 vis_output = visualizer.draw_instance_predictions(predictions=instances)
 
         return predictions, vis_output
