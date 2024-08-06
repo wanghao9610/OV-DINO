@@ -219,7 +219,7 @@ if __name__ == "__main__":
             outputs=[output_image, json_results],
         )
         clear.click(
-            lambda: [None, coco_categories, 0.5, json_results, False],
+            lambda: [None, coco_categories, 0.5, json_results, with_segmentation],
             inputs=None,
             outputs=[image, input_text, score_thr, json_results, with_segmentation],
         )
