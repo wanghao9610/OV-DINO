@@ -67,6 +67,9 @@ class OVDINODemo(object):
     def sam_infer_from_instances(self, image, instances):
         self.sam_predictor.set_image(image)
         boxes = instances.pred_boxes.tensor.detach().numpy()
+        if boxes.shape == 0:
+            return instances
+
         masks, scores, _ = self.sam_predictor.predict(
             point_coords=None,
             point_labels=None,
