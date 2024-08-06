@@ -16,6 +16,14 @@ from detectron2.evaluation.coco_evaluation import instances_to_coco_json
 from detectron2.utils.logger import setup_logger
 from detrex.data.datasets import clean_words_or_phrase
 
+try:
+    from sam2.build_sam import build_sam2
+    from sam2.sam2_image_predictor import SAM2ImagePredictor
+
+    SAM2_AVAILABLE = True
+except ImportError:
+    SAM2_AVAILABLE = False
+
 this_dir = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -34,6 +42,18 @@ def get_parser():
         default="projects/dino/configs/dino_r50_4scale_12ep.py",
         metavar="FILE",
         help="path to config file",
+    )
+    parser.add_argument(
+        "--sam-config-file",
+        default=None,
+        metavar="FILE",
+        help="path to config file",
+    )
+    parser.add_argument(
+        "--sam-init-checkpoint",
+        default=None,
+        metavar="FILE",
+        help="path to sam checkpoint file",
     )
     parser.add_argument(
         "--min_size_test",
@@ -90,22 +110,32 @@ if __name__ == "__main__":
 
     model.eval()
 
+    if args.sam_config_file is not None and SAM2_AVAILABLE:
+        logger.info(f"Building SAM2 model: {args.sam_config_file}")
+        sam_model = build_sam2(
+            args.sam_config_file, args.sam_init_checkpoint, device="cuda"
+        )
+        sam_predictor = SAM2ImagePredictor(sam_model)
+    else:
+        sam_predictor = None
+
     demo = OVDINODemo(
         model=model,
+        sam_predictor=sam_predictor,
         min_size_test=args.min_size_test,
         max_size_test=args.max_size_test,
         img_format=args.img_format,
         metadata_dataset=args.metadata_dataset,
     )
 
-    def gradio_predict(image, text, score_thr):
+    def gradio_predict(image, text, score_thr, with_segmentation):
         category_names = text.split(", ")
         category_names = [
             clean_words_or_phrase(cat_name) for cat_name in category_names
         ]
         image = np.array(image)
         predictions, visualized_output = demo.run_on_image(
-            image, category_names, score_thr
+            image, category_names, score_thr, with_segmentation
         )
 
         json_results = instances_to_coco_json(
@@ -173,6 +203,11 @@ if __name__ == "__main__":
                     interactive=True,
                     label="Score Threshold",
                 )
+                with gr.Row():
+                    with_segmentation = gr.Checkbox(
+                        label="With Segmentation (OV-SAM = OV-DINO + SAM2)",
+                        visible=SAM2_AVAILABLE,
+                    )
             with gr.Column(scale=7):
                 output_image = gr.Image(type="pil", label="output image")
 
@@ -180,12 +215,12 @@ if __name__ == "__main__":
         json_results = gr.JSON(label="JSON Results")
         submit.click(
             fn=gradio_predict,
-            inputs=[image, input_text, score_thr],
+            inputs=[image, input_text, score_thr, with_segmentation],
             outputs=[output_image, json_results],
         )
         clear.click(
-            lambda: [None, coco_categories, 0.5, json_results],
+            lambda: [None, coco_categories, 0.5, json_results, False],
             inputs=None,
-            outputs=[image, input_text, score_thr, json_results],
+            outputs=[image, input_text, score_thr, json_results, with_segmentation],
         )
         app.launch(show_error=True)

@@ -69,9 +69,11 @@ OV-DINO
 │       ├── annotations
 │       ├── train
 │       └── val
+├── docs
 ├── inits
 │   ├── huggingface
 │   ├── ovdino
+│   ├── sam2
 │   └── swin
 ├── ovdino
 │   ├── configs

@@ -4,6 +4,7 @@ import multiprocessing as mp
 from copy import copy
 
 import detectron2.data.transforms as T
+import numpy as np
 import torch
 from detectron2.data import MetadataCatalog
 from detectron2.utils.visualizer import ColorMode, Visualizer
@@ -22,6 +23,7 @@ class OVDINODemo(object):
     def __init__(
         self,
         model,
+        sam_predictor,
         min_size_test=800,
         max_size_test=1333,
         img_format="RGB",
@@ -40,6 +42,7 @@ class OVDINODemo(object):
 
         self.cpu_device = torch.device("cpu")
         self.instance_mode = instance_mode
+        self.sam_predictor = sam_predictor
 
         self.parallel = parallel
         if parallel:
@@ -61,7 +64,25 @@ class OVDINODemo(object):
                 metadata_dataset=metadata_dataset,
             )
 
-    def run_on_image(self, image, category_names, threshold=0.5):
+    def sam_infer_from_instances(self, image, instances):
+        self.sam_predictor.set_image(image)
+        boxes = instances.pred_boxes.tensor.detach().numpy()
+        masks, scores, _ = self.sam_predictor.predict(
+            point_coords=None,
+            point_labels=None,
+            box=boxes,
+            multimask_output=False,
+        )
+        # update pred_masks in instances
+        # masks shape: (batch_size) x (num_predicted_masks_per_input) x H x W
+        masks = masks.squeeze(1)
+        instances.pred_masks = masks
+
+        return instances
+
+    def run_on_image(
+        self, image, category_names, threshold=0.5, with_segmentation=False
+    ):
         """
         Args:
             image (np.ndarray): an image of shape (H, W, C) (in BGR order).
@@ -90,6 +111,9 @@ class OVDINODemo(object):
                 )
             if "instances" in predictions:
                 instances = predictions["instances"].to(self.cpu_device)
+                # Add the mask prediction from the box predictions using SAM.
+                if self.sam_predictor is not None and with_segmentation:
+                    instances = self.sam_infer_from_instances(image.copy(), instances)
                 vis_output = visualizer.draw_instance_predictions(predictions=instances)
 
         return predictions, vis_output
@@ -252,4 +276,5 @@ class AsyncPredictor:
 
     @property
     def default_buffer_size(self):
+        return len(self.procs) * 5
         return len(self.procs) * 5

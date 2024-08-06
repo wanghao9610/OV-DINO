@@ -20,6 +20,15 @@ from detectron2.data.detection_utils import read_image
 from detectron2.utils.logger import setup_logger
 from detrex.data.datasets import clean_words_or_phrase
 
+try:
+    from sam2.build_sam import build_sam2
+    from sam2.sam2_image_predictor import SAM2ImagePredictor
+
+    SAM2_AVAILABLE = True
+except ImportError:
+    print("SAM2 is not installed.")
+    SAM2_AVAILABLE = False
+
 # constants
 WINDOW_NAME = "COCO detections"
 
@@ -39,6 +48,18 @@ def get_parser():
         default="projects/dino/configs/dino_r50_4scale_12ep.py",
         metavar="FILE",
         help="path to config file",
+    )
+    parser.add_argument(
+        "--sam-config-file",
+        default=None,
+        metavar="FILE",
+        help="path to config file",
+    )
+    parser.add_argument(
+        "--sam-init-checkpoint",
+        default=None,
+        metavar="FILE",
+        help="path to sam checkpoint file",
     )
     parser.add_argument(
         "--webcam", action="store_true", help="Take inputs from webcam."
@@ -130,16 +151,25 @@ if __name__ == "__main__":
 
     model.eval()
 
+    if args.sam_config_file is not None and SAM2_AVAILABLE:
+        logger.info(f"Building SAM2 model: {args.sam_config_file}")
+        sam_model = build_sam2(
+            args.sam_config_file, args.sam_init_checkpoint, device="cuda"
+        )
+        sam_predictor = SAM2ImagePredictor(sam_model)
+    else:
+        sam_predictor = None
+
     category_names = args.category_names
     category_names = [clean_words_or_phrase(cat_name) for cat_name in category_names]
 
     demo = OVDINODemo(
         model=model,
+        sam_predictor=sam_predictor,
         min_size_test=args.min_size_test,
         max_size_test=args.max_size_test,
         img_format=args.img_format,
         metadata_dataset=args.metadata_dataset,
-        # category_names=category_names,
     )
 
     if args.input:
@@ -239,4 +269,6 @@ if __name__ == "__main__":
         if args.output:
             output_file.release()
         else:
+            cv2.destroyAllWindows()
+            cv2.destroyAllWindows()
             cv2.destroyAllWindows()
