@@ -148,7 +148,7 @@ if __name__ == "__main__":
                 <h1>🦖 OV-DINO </h1>
                 <h2>Unified Open-Vocabulary Detection with Language-Aware Selective Fusion</h2>
                 
-                [[`Paper`](https://arxiv.org/abs/2407.07844)] [[`HuggingFace`](https://huggingface.co/hao9610/ov-dino-tiny)] [[`Website`](https://wanghao9610.github.io/OV-DINO)]
+                [[`Website`](https://wanghao9610.github.io/OV-DINO)] [[`Paper`](https://arxiv.org/abs/2407.07844)] [[`HuggingFace`](https://huggingface.co/hao9610/ov-dino-tiny)] [[`Code`](https://github.com/wanghao9610/OV-DINO)]
                 </div>
                 """
             )
