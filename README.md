@@ -13,21 +13,14 @@
 [[`Paper`](https://arxiv.org/abs/2407.07844)] [[`HuggingFace`](https://huggingface.co/hao9610/ov-dino-tiny)] [[`Demo`](http://47.115.200.157:7860)] [[`BibTex`](#pushpin-citation)]
 
 </div>
+<div align="center">
+<div align="left" style="display: inline-block; text-align: left;">
 
-<div style="display: flex; justify-content: center;">
-  <div style="text-align: left;">
-    <a href="https://paperswithcode.com/sota/zero-shot-object-detection-on-mscoco?p=ov-dino-unified-open-vocabulary-detection" target="_blank">
-      <img src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/ov-dino-unified-open-vocabulary-detection/zero-shot-object-detection-on-mscoco" alt="PWC">
-    </a>
-    <br>
-    <a href="https://paperswithcode.com/sota/zero-shot-object-detection-on-lvis-v1-0?p=ov-dino-unified-open-vocabulary-detection" target="_blank">
-      <img src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/ov-dino-unified-open-vocabulary-detection/zero-shot-object-detection-on-lvis-v1-0" alt="PWC">
-    </a>
-    <br>
-    <a href="https://paperswithcode.com/sota/zero-shot-object-detection-on-lvis-v1-0-val?p=ov-dino-unified-open-vocabulary-detection" target="_blank">
-      <img src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/ov-dino-unified-open-vocabulary-detection/zero-shot-object-detection-on-lvis-v1-0-val" alt="PWC">
-    </a>
-  </div>
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/ov-dino-unified-open-vocabulary-detection/zero-shot-object-detection-on-mscoco)](https://paperswithcode.com/sota/zero-shot-object-detection-on-mscoco?p=ov-dino-unified-open-vocabulary-detection)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/ov-dino-unified-open-vocabulary-detection/zero-shot-object-detection-on-lvis-v1-0)](https://paperswithcode.com/sota/zero-shot-object-detection-on-lvis-v1-0?p=ov-dino-unified-open-vocabulary-detection)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/ov-dino-unified-open-vocabulary-detection/zero-shot-object-detection-on-lvis-v1-0-val)](https://paperswithcode.com/sota/zero-shot-object-detection-on-lvis-v1-0-val?p=ov-dino-unified-open-vocabulary-detection)
+
+</div>
 </div>
 
 ## :fire: Updates
