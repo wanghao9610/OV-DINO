@@ -17,7 +17,9 @@
 <div align="left" style="display: inline-block; text-align: left;">
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/ov-dino-unified-open-vocabulary-detection/zero-shot-object-detection-on-mscoco)](https://paperswithcode.com/sota/zero-shot-object-detection-on-mscoco?p=ov-dino-unified-open-vocabulary-detection)
+
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/ov-dino-unified-open-vocabulary-detection/zero-shot-object-detection-on-lvis-v1-0)](https://paperswithcode.com/sota/zero-shot-object-detection-on-lvis-v1-0?p=ov-dino-unified-open-vocabulary-detection)
+
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/ov-dino-unified-open-vocabulary-detection/zero-shot-object-detection-on-lvis-v1-0-val)](https://paperswithcode.com/sota/zero-shot-object-detection-on-lvis-v1-0-val?p=ov-dino-unified-open-vocabulary-detection)
 
 </div>
