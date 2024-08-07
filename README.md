@@ -12,7 +12,6 @@
 
 [[`Paper`](https://arxiv.org/abs/2407.07844)] [[`HuggingFace`](https://huggingface.co/hao9610/ov-dino-tiny)] [[`Demo`](http://47.115.200.157:7860)] [[`BibTex`](#pushpin-citation)]
 
-
 </div>
 <div align="center">
 <div align="left" style="display: inline-block; text-align: left;">
