@@ -14,6 +14,22 @@
 
 </div>
 
+<div style="display: flex; justify-content: center;">
+  <div style="text-align: left;">
+    <a href="https://paperswithcode.com/sota/zero-shot-object-detection-on-mscoco?p=ov-dino-unified-open-vocabulary-detection" target="_blank">
+      <img src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/ov-dino-unified-open-vocabulary-detection/zero-shot-object-detection-on-mscoco" alt="PWC">
+    </a>
+    <br>
+    <a href="https://paperswithcode.com/sota/zero-shot-object-detection-on-lvis-v1-0?p=ov-dino-unified-open-vocabulary-detection" target="_blank">
+      <img src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/ov-dino-unified-open-vocabulary-detection/zero-shot-object-detection-on-lvis-v1-0" alt="PWC">
+    </a>
+    <br>
+    <a href="https://paperswithcode.com/sota/zero-shot-object-detection-on-lvis-v1-0-val?p=ov-dino-unified-open-vocabulary-detection" target="_blank">
+      <img src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/ov-dino-unified-open-vocabulary-detection/zero-shot-object-detection-on-lvis-v1-0-val" alt="PWC">
+    </a>
+  </div>
+</div>
+
 ## :fire: Updates
 
 - **`06/08/2024`**: :sparkler: Awesome!!! **OV-SAM = OV-DINO + SAM2**. We update OV-SAM marrying OV-DINO with SAM2 on the [online demo](http://47.115.200.157:7860).
@@ -198,6 +214,8 @@ sh scripts/train.sh \
 ## :computer: Demo
 * Local inference on a image or folder give the category names.
   ```bash
+  # for ovdino: conda activate ovdino
+  # for ovsam: conda activate ovsam
   cd $root_dir/ovdino
   sh scripts/demo.sh demo_config.py pretrained_model category_names input_images_or_directory output_directory
   ```
