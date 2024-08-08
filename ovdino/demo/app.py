@@ -2,8 +2,11 @@
 import argparse
 import multiprocessing as mp
 import os
+import os.path as osp
 import sys
+from datetime import datetime
 
+import cv2
 import gradio as gr
 import numpy as np
 
@@ -24,7 +27,7 @@ try:
 except ImportError:
     SAM2_AVAILABLE = False
 
-this_dir = os.path.dirname(os.path.abspath(__file__))
+this_dir = osp.dirname(osp.abspath(__file__))
 
 
 def setup(args):
@@ -77,13 +80,19 @@ def get_parser():
         "--metadata_dataset",
         type=str,
         default="coco_2017_val",
-        help="The metadata infomation to be used. Default to COCO val metadata.",
+        help="The metadata information to be used. Default to COCO val metadata.",
     )
     parser.add_argument(
         "--confidence-threshold",
         type=float,
         default=0.5,
         help="Minimum score for instance predictions to be shown",
+    )
+    parser.add_argument(
+        "--log_dir",
+        type=str,
+        default="./app_logs",
+        help="the log directory of app",
     )
     parser.add_argument(
         "--opts",
@@ -128,7 +137,27 @@ if __name__ == "__main__":
         metadata_dataset=args.metadata_dataset,
     )
 
+    log_dir = args.log_dir
+    os.makedirs(log_dir, exist_ok=True)
+
     def gradio_predict(image, text, score_thr, with_segmentation):
+        # day_timestamp and file_timestamp
+        day_timestamp = datetime.now().strftime("%Y%m%d")
+        file_timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+
+        day_log_dir = osp.join(log_dir, day_timestamp)
+        log_file = osp.join(day_log_dir, f"{day_timestamp}.log")
+        img_log_dir = osp.join(day_log_dir, "image")
+        out_log_dir = osp.join(day_log_dir, "output")
+
+        os.makedirs(day_log_dir, exist_ok=True)
+        os.makedirs(img_log_dir, exist_ok=True)
+        os.makedirs(out_log_dir, exist_ok=True)
+
+        if not osp.exists(log_file):
+            with open(log_file, "w") as f:
+                f.write("image\t|\ttext\t|\twith_seg\t|\tscore_thr\n")
+
         category_names = text.split(", ")
         category_names = [
             clean_words_or_phrase(cat_name) for cat_name in category_names
@@ -145,23 +174,33 @@ if __name__ == "__main__":
             json_result["category_name"] = category_names[json_result["category_id"]]
             del json_result["image_id"]
 
-        return visualized_output.get_image()[:, :, ::-1], json_results
+        visualized_output = visualized_output.get_image()
+
+        cv2.imwrite(f"{img_log_dir}/{file_timestamp}.png", image[:, :, ::-1])
+        cv2.imwrite(f"{out_log_dir}/{file_timestamp}.png", visualized_output)
+
+        with open(log_file, "a") as f:
+            f.write(
+                f"{file_timestamp}.png\t|\t{text}\t|\t{str(with_segmentation)}\t|\t{score_thr}\n"
+            )
+
+        return visualized_output[:, :, ::-1], json_results
 
     examples = [
         [
-            os.path.join(this_dir, "./imgs/000000001584.jpg"),
+            osp.join(this_dir, "./imgs/000000001584.jpg"),
             "person, bus, bicycle",
         ],
         [
-            os.path.join(this_dir, "./imgs/000000004495.jpg"),
+            osp.join(this_dir, "./imgs/000000004495.jpg"),
             "person, tv, couch, whiteboard, poster",
         ],
         [
-            os.path.join(this_dir, "./imgs/000000009483.jpg"),
+            osp.join(this_dir, "./imgs/000000009483.jpg"),
             "person, keyboard, table, computer monitor, computer mouse",
         ],
         [
-            os.path.join(this_dir, "./imgs/000000017714.jpg"),
+            osp.join(this_dir, "./imgs/000000017714.jpg"),
             "table, cup, spoon, pizza, knife, fork, dish",
         ],
     ]
@@ -186,6 +225,8 @@ if __name__ == "__main__":
                 <ul>
                 <li> OV-DINO detects objects in images based on the classes you provided.</li>
                 <li> OV-SAM marries OV-DINO with SAM2 for better segmentation.</li>
+                
+                NOTE: You uploaded image will be stored for failure analysis.
                 </h3>
                 </div>
                 """
@@ -193,10 +234,10 @@ if __name__ == "__main__":
         with gr.Row():
             with gr.Column(scale=3):
                 with gr.Row():
-                    image = gr.Image(type="pil", label="input image")
+                    image = gr.Image(type="pil", label="Input Image")
                 input_text = gr.Textbox(
                     lines=7,
-                    label="Enter the classes to be detected, separated by comma",
+                    label="Enter the classes to be detected, separated by 'comma and space' (, )",
                     value=coco_categories,
                     elem_id="textbox",
                 )
@@ -217,7 +258,7 @@ if __name__ == "__main__":
                         visible=SAM2_AVAILABLE,
                     )
             with gr.Column(scale=7):
-                output_image = gr.Image(type="pil", label="output image")
+                output_image = gr.Image(type="pil", label="Output Image")
 
         gr.Examples(examples=examples, inputs=[image, input_text], examples_per_page=10)
         json_results = gr.JSON(label="JSON Results")

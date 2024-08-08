@@ -27,7 +27,7 @@
 
 - **`06/08/2024`**: :sparkler: Awesome!!! **OV-SAM = OV-DINO + SAM2**. We update OV-SAM marrying OV-DINO with SAM2 on the [online demo](http://47.115.200.157:7860).
 
-- **`16/07/2024`**: We provide the [online demo](http://47.115.200.157:7860), **click and enjoy** !!!
+- **`16/07/2024`**: We provide the [online demo](http://47.115.200.157:7860), **click and enjoy** !!! NOTE: You uploaded image will be stored for failure analysis.
 
 - **`16/07/2024`**: We release the web inference demo, try to deploy it by yourself.
 
