@@ -13,6 +13,7 @@ output_dir=$root_dir/wkdrs/$config_name
 
 # env config
 export DETECTRON2_DATASETS="$root_dir/datas/"
+export MODEL_ROOT="$root_dir/inits/"
 export HF_HOME="$root_dir/inits/huggingface"
 export TRANSFORMERS_OFFLINE=1
 export TRANSFORMERS_VERBOSITY=error
