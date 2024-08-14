@@ -129,7 +129,7 @@ lr_multiplier_12ep = default_coco_scheduler(12, 11, 0)
 lr_multiplier_50ep_warmup = default_coco_scheduler(50, 40, 1e-3)
 lr_multiplier_12ep_warmup = default_coco_scheduler(12, 11, 1e-3)
 
-# warmup scheduler for ovdino
+# warmup scheduler for ovdino on COCO fine-tuning
 lr_multiplier_120k_bs32_24ep_two_steps_warmup = multi_steps_scheduler(
     24, [16, 22], 1000, 120000, 32, 90000
 )

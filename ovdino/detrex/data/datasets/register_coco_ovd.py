@@ -40,7 +40,7 @@ def register_all_coco_instances(root):
         num_sampled_classes,
         template,
     ) in _PREDEFINED_SPLITS.items():
-        # Assume pre-defined datasets live in `./datasets`.
+        # Assume pre-defined datasets live in `./datas`.
         register_coco_ovd_instances(
             key,
             _get_coco_instances_meta(),
