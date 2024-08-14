@@ -243,7 +243,7 @@ sh scripts/finetune.sh \
 
   Coming soon
   
-We will update the pre-training code after our paper is accepted.
+We will update the all pre-training code after our paper is accepted.
 
 ## :computer: Demo
 * Local inference on a image or folder give the category names.
