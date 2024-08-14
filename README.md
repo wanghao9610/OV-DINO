@@ -66,7 +66,7 @@ This project contains the official PyTorch implementation, pre-trained models, f
 ```
 OV-DINO
 ├── datas
-│   ├── objects365
+│   ├── o365
 │   │   ├── annotations
 │   │   ├── train
 │   │   ├── val
@@ -210,7 +210,7 @@ sh scripts/eval.sh \
 #### Fine-Tuning on COCO Dataset
 ```bash
 cd $root_dir/ovdino
-sh scripts/train.sh \
+sh scripts/finetune.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_ft_coco_24ep.py \
   ../inits/ovdino/ovdino_swint_og-coco50.6_lvismv39.4_lvis32.2.pth
 ```
@@ -221,10 +221,30 @@ sh scripts/train.sh \
 * Refer the following command to run fine-tuning.
   ```bash
   cd $root_dir/ovdino
-  sh scripts/train.sh \
+  sh scripts/finetune.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_ft_custom_24ep.py \
     ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth
   ```
+### 5. Pre-Training
+#### Pre-Training on Objects365 dataset
+* Download dataset following [Objects365 Data Preparing](#objects365).
+* Refer the following command to run pre-training.
+  ```bash
+  cd $root_dir/ovdino
+  sh scripts/pretrain.sh \
+    projects/ovdino/configs/ovdino_swin_tiny224_bert_base_pretrain_o365_24ep.py
+  ```
+  NOTE: The default batch size for O365 pre-training is 64 in our experiments, and running on 8 A100 GPUs. If you encounter Out-of-Memory error, you can adjust the batch size and learning rate by linearly.
+* Pre-Training on [Objects365, GoldG] datasets
+  
+  Coming soon
+
+* Pre-Training on [Objects365, GoldG, CC1M‡] datasets
+
+  Coming soon
+  
+We will update the pre-training code after our paper is accepted.
+
 ## :computer: Demo
 * Local inference on a image or folder give the category names.
   ```bash

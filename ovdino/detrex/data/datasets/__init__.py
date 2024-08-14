@@ -16,7 +16,12 @@
 # Copyright (c) Facebook, Inc. and its affiliates.
 # ------------------------------------------------------------------------------------------------
 
-from . import register_coco_ovd, register_custom_ovd, register_lvis_ovd
+from . import (
+    register_coco_ovd,
+    register_custom_ovd,
+    register_lvis_ovd,
+    register_o365_ovd,
+)
 from .coco_ovd import register_coco_ovd_instances
 from .imagenet_template import template_meta
 from .o365_ovd import register_objects365_ovd_instances

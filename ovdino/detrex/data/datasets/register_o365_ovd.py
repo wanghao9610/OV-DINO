@@ -390,7 +390,7 @@ _PREDEFINED_SPLITS = {
 def _get_objects365_instances_meta():
     OBEJECTS365_CATEGORIES = OBEJECTS365V1_CATEGORIES
 
-    thing_ids = [k["id"] for k in OBEJECTS365_CATEGORIES]
+    thing_ids = [k["id"] - 1 for k in OBEJECTS365_CATEGORIES]
     assert len(thing_ids) == 365, len(thing_ids)
     # Mapping from the incontiguous Objects365 category id to an id in [0, 364]
     thing_dataset_id_to_contiguous_id = {k: i for i, k in enumerate(thing_ids)}
