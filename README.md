@@ -237,11 +237,11 @@ sh scripts/finetune.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_pretrain_o365_24ep.py
   ```
   NOTE: The default batch size for O365 pre-training is 64 in our experiments, and running on 8 A100 GPUs. If you encounter Out-of-Memory error, you can adjust the batch size and learning rate by linearly.
-* Pre-Training on [Objects365, GoldG] datasets
+#### Pre-Training on [Objects365, GoldG] datasets
   
   Coming soon
 
-* Pre-Training on [Objects365, GoldG, CC1M‡] datasets
+#### Pre-Training on [Objects365, GoldG, CC1M‡] datasets
 
   Coming soon
   
