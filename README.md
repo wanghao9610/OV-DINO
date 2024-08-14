@@ -25,6 +25,8 @@
 
 ## :fire: Updates
 
+- **`15/08/2024`**: :sparkles: Have a look!!! We update the pre-training code on O365 dataset. You could try to reproduce our results.
+
 - **`06/08/2024`**: :sparkler: Awesome!!! **OV-SAM = OV-DINO + SAM2**. We update OV-SAM marrying OV-DINO with SAM2 on the [online demo](http://47.115.200.157:7860).
 
 - **`16/07/2024`**: We provide the [online demo](http://47.115.200.157:7860), **click and enjoy** !!! NOTE: You uploaded image will be stored for failure analysis.
