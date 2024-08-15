@@ -218,7 +218,7 @@ bash scripts/finetune.sh \
 ```
 
 #### Fine-Tuning on Custom Dataset
-* Prepare your custom dataset as the COCO annotation format.
+* Prepare your custom dataset as the COCO annotation format, following the instructions on [custom_ovd.py](ovdino/configs/common/data/custom_ovd.py#L17).
 
 * Refer the following command to run fine-tuning.
   ```bash

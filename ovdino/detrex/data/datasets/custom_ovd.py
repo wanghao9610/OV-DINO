@@ -14,6 +14,7 @@ from detrex.utils import rank0_print
 from fvcore.common.timer import Timer
 from PIL import Image
 from pycocotools.coco import COCO
+from tqdm import tqdm
 
 from .imagenet_template import template_meta
 from .utils import clean_words_or_phrase
@@ -28,14 +29,14 @@ logger = logging.getLogger(__name__)
 __all__ = ["load_custom_json", "register_custom_ovd_instances"]
 
 
-def load_coco_json(
+def load_custom_json(
     json_file,
     image_root,
     dataset_name=None,
     extra_annotation_keys=None,
     num_sampled_classes=-1,
     template="simple",
-    test_mode=True,
+    test_mode=False,
 ):
     """
     Load a json file with COCO's instances annotation format.
@@ -167,7 +168,7 @@ Category ids in annotations are not in [1, #categories]! We'll apply a mapping f
 
     num_instances_without_valid_segmentation = 0
 
-    for img_dict, anno_dict_list in imgs_anns:
+    for img_dict, anno_dict_list in tqdm(imgs_anns, desc="Loading dataset"):
         record = {}
         record["file_name"] = os.path.join(image_root, img_dict["file_name"])
         record["height"] = img_dict["height"]
@@ -241,8 +242,12 @@ Category ids in annotations are not in [1, #categories]! We'll apply a mapping f
             sampled_cat_names = [
                 clean_words_or_phrase(cat_name) for _, cat_name in id2name.items()
             ]
+            sampled_cat_names = [
+                [template.format(cat_name) for template in template_meta[template]]
+                for cat_name in sampled_cat_names
+            ]
 
-        # sample categoriy from category_list
+        # sample category from category_list
         if not test_mode and num_sampled_classes > 0:
             obj_cat_ids = [obj["category_id"] for obj in objs]
             continous_cat_ids = sorted(id_map.values())
@@ -261,10 +266,10 @@ Category ids in annotations are not in [1, #categories]! We'll apply a mapping f
                 cat_id = obj["category_id"]
                 obj["category_id"] = sampled_id_map[cat_id]
 
-        sampled_cat_names = [
-            random.choice(template_meta[template]).format(cat_name)
-            for cat_name in sampled_cat_names
-        ]
+            sampled_cat_names = [
+                random.choice(template_meta[template]).format(cat_name)
+                for cat_name in sampled_cat_names
+            ]
 
         record["category_names"] = sampled_cat_names
 
@@ -286,7 +291,7 @@ Category ids in annotations are not in [1, #categories]! We'll apply a mapping f
     return dataset_dicts
 
 
-def register_coco_ovd_instances(
+def register_custom_ovd_instances(
     name,
     metadata,
     json_file,

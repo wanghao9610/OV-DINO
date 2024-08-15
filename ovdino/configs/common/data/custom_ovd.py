@@ -14,30 +14,30 @@ from omegaconf import OmegaConf
 
 dataloader = OmegaConf.create()
 
-# if you follow the coco format, you can use the following code.
-# if you want to define it by yourself, you can change it on ovdino/detrex/data/datasets/custom_ovd.py.
+# If you want to define it by yourself, you can change it on ovdino/detrex/data/datasets/custom_ovd.py, you need to uncomment out the following code (ovdino/detrex/data/datasets/__init__.py L21) first.
+# If you follow the coco format, you need uncomment and change the following code.
 # register_coco_ovd_instances(
 #     "custom_train_ovd_unipro",  # dataset_name
-#     {},  # custom_data_info
-#     "/path/to/train.json",  # annotations_jsonfile
+#     {},  # custom_data_info, example: {"thing_dataset_id_to_contiguous_id": {0: 0, 1: 0}, "thing_classes": ["category_0", "category_1"]}
+#     "/path/to/train.json",  # annotations_json_file
 #     "/path/to/train/images",  # image_root
-#     80,  # number_of_classes, default: 80
+#     2,  # number_of_classes, default: 2
 #     "full",  # template, default: full
 # )
 # register_coco_ovd_instances(
 #     "custom_val_ovd_unipro",
-#     {},
+#     {}, # custom_data_info, example: {"thing_dataset_id_to_contiguous_id": {0: 0, 1: 0}, "thing_classes": ["category_0", "category_1"]}
 #     "/path/to/val.json",
 #     "/path/to/val/images",
-#     80,
+#     2,
 #     "full",
 # )
 # register_coco_ovd_instances(
 #     "custom_test_ovd",
-#     {},
+#     {}, # custom_data_info, example: {"thing_dataset_id_to_contiguous_id": {0: 0, 1: 0}, "thing_classes": ["category_0", "category_1"]}
 #     "/path/to/test.json",
 #     "/path/to/test/images",
-#     80,
+#     2,
 #     "identity",
 # )
 
