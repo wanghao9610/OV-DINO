@@ -244,6 +244,10 @@ Category ids in annotations are not in [1, #categories]! We'll apply a mapping f
             sampled_cat_names = [
                 clean_words_or_phrase(cat_name) for _, cat_name in id2name.items()
             ]
+            sampled_cat_names = [
+                    [template.format(cat_name) for template in template_meta[template]]
+                    for cat_name in sampled_cat_names
+                ]
 
         # sample category from category_list
         if not test_mode and num_sampled_classes > 0:
@@ -266,10 +270,10 @@ Category ids in annotations are not in [1, #categories]! We'll apply a mapping f
                 cat_id = sampled_cat_names.index(obj_cat_name)
                 obj["category_id"] = cat_id
 
-        sampled_cat_names = [
-            random.choice(template_meta[template]).format(cat_name)
-            for cat_name in sampled_cat_names
-        ]
+            sampled_cat_names = [
+                random.choice(template_meta[template]).format(cat_name)
+                for cat_name in sampled_cat_names
+            ]
 
         record["category_names"] = sampled_cat_names
 

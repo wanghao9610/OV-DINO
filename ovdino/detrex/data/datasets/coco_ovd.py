@@ -242,8 +242,12 @@ Category ids in annotations are not in [1, #categories]! We'll apply a mapping f
             sampled_cat_names = [
                 clean_words_or_phrase(cat_name) for _, cat_name in id2name.items()
             ]
+            sampled_cat_names = [
+                    [template.format(cat_name) for template in template_meta[template]]
+                    for cat_name in sampled_cat_names
+                ]
 
-        # sample categoriy from category_list
+        # sample category from category_list
         if not test_mode and num_sampled_classes > 0:
             obj_cat_ids = [obj["category_id"] for obj in objs]
             continous_cat_ids = sorted(id_map.values())
@@ -262,10 +266,10 @@ Category ids in annotations are not in [1, #categories]! We'll apply a mapping f
                 cat_id = obj["category_id"]
                 obj["category_id"] = sampled_id_map[cat_id]
 
-        sampled_cat_names = [
-            random.choice(template_meta[template]).format(cat_name)
-            for cat_name in sampled_cat_names
-        ]
+            sampled_cat_names = [
+                random.choice(template_meta[template]).format(cat_name)
+                for cat_name in sampled_cat_names
+            ]
 
         record["category_names"] = sampled_cat_names
 
