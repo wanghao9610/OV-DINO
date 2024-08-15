@@ -25,7 +25,7 @@
 
 ## :fire: Updates
 
-- **`16/08/2024`**: :sparkles: Have a look!!! We update the pre-training code on O365 dataset. You could try to reproduce our results.
+- **`15/08/2024`**: :sparkles: Have a look!!! We release the pre-training code on O365 dataset. You could try to reproduce our results.
 
 - **`06/08/2024`**: :sparkler: Awesome!!! **OV-SAM = OV-DINO + SAM2**. We update OV-SAM marrying OV-DINO with SAM2 on the [online demo](http://47.115.200.157:7860).
 
@@ -257,7 +257,7 @@ bash scripts/finetune.sh \
 
   Coming soon ...
   
-*We will update the all pre-training code after our paper is accepted.*
+*We will release the all pre-training code after our paper is accepted.*
 
 ## :computer: Demo
 * Local inference on a image or folder give the category names.
