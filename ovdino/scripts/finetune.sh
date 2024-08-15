@@ -20,7 +20,7 @@ export TRANSFORMERS_VERBOSITY=error
 export TOKENIZERS_PARALLELISM=false
 export TORCH_DISTRIBUTED_DEBUG=DETAIL
 
-echo "Distributed Training"
+echo "Distributed Fine-Tuning with $config_name"
 evaluation_dir="$output_dir/eval_coco_$time"
 mkdir -p $evaluation_dir
 cd $code_dir

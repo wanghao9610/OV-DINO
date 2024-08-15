@@ -25,7 +25,7 @@
 
 ## :fire: Updates
 
-- **`15/08/2024`**: :sparkles: Have a look!!! We update the pre-training code on O365 dataset. You could try to reproduce our results.
+- **`16/08/2024`**: :sparkles: Have a look!!! We update the pre-training code on O365 dataset. You could try to reproduce our results.
 
 - **`06/08/2024`**: :sparkler: Awesome!!! **OV-SAM = OV-DINO + SAM2**. We update OV-SAM marrying OV-DINO with SAM2 on the [online demo](http://47.115.200.157:7860).
 
@@ -183,13 +183,13 @@ pip install -e ./
 Download the pre-trained model from [Model Zoo](#model-zoo), and put them on inits/ovdino directory.
 ```bash
 cd $root_dir/ovdino
-sh scripts/eval.sh path_to_eval_config_file path_to_pretrained_model output_directory
+bash scripts/eval.sh path_to_eval_config_file path_to_pretrained_model output_directory
 ```
 
 #### Zero-Shot Evaluation on COCO Benchmark
 ```bash
 cd $root_dir/ovdino
-sh scripts/eval.sh \
+bash scripts/eval.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_eval_coco.py \
   ../inits/ovdino/ovdino_swint_og-coco50.6_lvismv39.4_lvis32.2.pth \
   ../wkdrs/eval_ovdino
@@ -197,12 +197,12 @@ sh scripts/eval.sh \
 #### Zero-Shot Evaluation on LVIS Benchmark
 ```bash
 cd $root_dir/ovdino
-sh scripts/eval.sh \
+bash scripts/eval.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_eval_lvismv.py \
   ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth \
   ../wkdrs/eval_ovdino
 
-sh scripts/eval.sh \
+bash scripts/eval.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_eval_lvis.py \
   ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth \
   ../wkdrs/eval_ovdino
@@ -212,7 +212,7 @@ sh scripts/eval.sh \
 #### Fine-Tuning on COCO Dataset
 ```bash
 cd $root_dir/ovdino
-sh scripts/finetune.sh \
+bash scripts/finetune.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_ft_coco_24ep.py \
   ../inits/ovdino/ovdino_swint_og-coco50.6_lvismv39.4_lvis32.2.pth
 ```
@@ -223,7 +223,7 @@ sh scripts/finetune.sh \
 * Refer the following command to run fine-tuning.
   ```bash
   cd $root_dir/ovdino
-  sh scripts/finetune.sh \
+  bash scripts/finetune.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_ft_custom_24ep.py \
     ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth
   ```
@@ -231,19 +231,31 @@ sh scripts/finetune.sh \
 #### Pre-Training on Objects365 dataset
 * Download dataset following [Objects365 Data Preparing](#objects365).
 * Refer the following command to run pre-training.
+  
+  On the first machine:
   ```bash
   cd $root_dir/ovdino
-  sh scripts/pretrain.sh \
+  # Replace MASTER_PORT and MASTER_ADDR with your actual machine settings.
+  NNODES=2 NODE_RANK=0 PORT=$MASTER_PORT MASTER_ADDR=$MASTER_ADDR \
+  bash scripts/pretrain.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_pretrain_o365_24ep.py
   ```
-  NOTE: The default batch size for O365 pre-training is 64 in our experiments, and running on 8 A100 GPUs. If you encounter Out-of-Memory error, you can adjust the batch size and learning rate by linearly.
+  On the second machine:
+  ```bash
+  cd $root_dir/ovdino
+  # Replace MASTER_PORT and MASTER_ADDR with your actual machine settings.
+  NNODES=2 NODE_RANK=1 PORT=$MASTER_PORT MASTER_ADDR=$MASTER_ADDR \
+  bash scripts/pretrain.sh \
+    projects/ovdino/configs/ovdino_swin_tiny224_bert_base_pretrain_o365_24ep.py
+  ```
+  NOTE: The default batch size for O365 pre-training is 64 in our experiments, and running on 2 nodes with 8 A100 GPUs per-node. If you encounter Out-of-Memory error, you can adjust the batch size and learning rate, total steps by linearly.
 #### Pre-Training on [Objects365, GoldG] datasets
   
-  Coming soon
+  Coming soon ...
 
 #### Pre-Training on [Objects365, GoldG, CC1M‡] datasets
 
-  Coming soon
+  Coming soon ...
   
 We will update the all pre-training code after our paper is accepted.
 
@@ -253,25 +265,25 @@ We will update the all pre-training code after our paper is accepted.
   # for ovdino: conda activate ovdino
   # for ovsam: conda activate ovsam
   cd $root_dir/ovdino
-  sh scripts/demo.sh demo_config.py pretrained_model category_names input_images_or_directory output_directory
+  bash scripts/demo.sh demo_config.py pretrained_model category_names input_images_or_directory output_directory
   ```
   Examples:
   ```bash
   cd $root_dir/ovdino
   # single image inference
-  sh scripts/demo.sh \
+  bash scripts/demo.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_infer_demo.py \
     ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth \
     "class0 class1 class2 ..." img0.jpg output_dir/img0_vis.jpg
 
   # multi images inference
-  sh scripts/demo.sh \
+  bash scripts/demo.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_infer_demo.py \
     ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth \
     "class0 long_class1 long_class2 ..." "img0.jpg img1.jpg" output_dir
 
   # image folder inference
-  sh scripts/demo.sh \
+  bash scripts/demo.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_infer_demo.py \
     ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth \
     "class0 long_class1 long_class2 ..." image_dir output_dir
@@ -282,7 +294,7 @@ We will update the all pre-training code after our paper is accepted.
 
   ```bash
   cd $root_dir/ovdino
-  sh scripts/app.sh \
+  bash scripts/app.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_infer_demo.py \
     ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth
   ```
