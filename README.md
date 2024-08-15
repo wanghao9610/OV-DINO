@@ -308,7 +308,7 @@ bash scripts/finetune.sh \
 - [x] Release the fine-tuning and evaluation code.
 - [x] Support the local inference demo.
 - [x] Support the web inference demo.
-- [-] Release the pre-training code.
+- [o] Release the pre-training code.
 - [ ] Support ONNX exporting OV-DINO model.
 - [ ] Support OV-DINO in 🤗 transformers.
 
