@@ -235,16 +235,16 @@ bash scripts/finetune.sh \
   On the first machine:
   ```bash
   cd $root_dir/ovdino
-  # Replace MASTER_PORT and MASTER_ADDR with your actual machine settings.
-  NNODES=2 NODE_RANK=0 PORT=$MASTER_PORT MASTER_ADDR=$MASTER_ADDR \
+  # Replace $MASTER_PORT and $MASTER_ADDR with your actual machine settings.
+  NNODES=2 NODE_RANK=0 MASTER_PORT=$MASTER_PORT MASTER_ADDR=$MASTER_ADDR \
   bash scripts/pretrain.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_pretrain_o365_24ep.py
   ```
   On the second machine:
   ```bash
   cd $root_dir/ovdino
-  # Replace MASTER_PORT and MASTER_ADDR with your actual machine settings.
-  NNODES=2 NODE_RANK=1 PORT=$MASTER_PORT MASTER_ADDR=$MASTER_ADDR \
+  # Replace $MASTER_PORT and $MASTER_ADDR with your actual machine settings.
+  NNODES=2 NODE_RANK=1 MASTER_PORT=$MASTER_PORT MASTER_ADDR=$MASTER_ADDR \
   bash scripts/pretrain.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_pretrain_o365_24ep.py
   ```
