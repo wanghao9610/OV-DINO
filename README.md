@@ -170,14 +170,14 @@ pip install -e ./
 * Refer to the [OpenDataLab](https://opendatalab.com/OpenDataLab/Objects365_v1/cli/main) for Objects365V1 download, which has provided detailed download instruction.
   ```bash
   cd $root_dir
-  mkdir -p datas/objects365/annotations
-  # Suppose you download the Objects365 raw file and put them on datas/objects365/raw, extract the tared files and reorder them.
-  cd datas/objects365/raw
+  mkdir -p datas/o365/annotations
+  # Suppose you download the Objects365 raw file and put them on datas/o365/raw, extract the tared files and reorder them.
+  cd datas/o365/raw
   tar -xvf Objects365_v1.tar.gz
   cd 2019-08-02
   for file in *.zip; do unzip -o "$file"; done
-  mv *.json $root_dir/datas/objects365/annotations
-  mv train val test $root_dir/datas/objects365
+  mv *.json $root_dir/datas/o365/annotations
+  mv train val test $root_dir/datas/o365
   ```
 ### 3. Evaluation
 Download the pre-trained model from [Model Zoo](#model-zoo), and put them on inits/ovdino directory.
