@@ -29,7 +29,7 @@
 
 - **`06/08/2024`**: :sparkler: Awesome!!! **OV-SAM = OV-DINO + SAM2**. We update OV-SAM marrying OV-DINO with SAM2 on the [online demo](http://47.115.200.157:7860).
 
-- **`16/07/2024`**: We provide the [online demo](http://47.115.200.157:7860), **click and enjoy** !!! NOTE: You uploaded image will be stored for failure analysis.
+- **`16/07/2024`**: We provide the [online demo](http://47.115.200.157:7860), **click and enjoy** !!! **NOTE**: *You uploaded image will be stored for failure analysis.*
 
 - **`16/07/2024`**: We release the web inference demo, try to deploy it by yourself.
 
@@ -61,7 +61,7 @@ This project contains the official PyTorch implementation, pre-trained models, f
 | OV-DINO<sup>2</sup> | O365,GoldG      | 39.4 | 32.0 | 38.7 | 41.3 | 32.2  | 26.2 | 30.1 | 37.3 | 50.6 / 58.4 |   🤗 [CKPT](https://huggingface.co/hao9610/OV-DINO/resolve/main/ovdino_swint_og-coco50.6_lvismv39.4_lvis32.2.pth)      |
 | OV-DINO<sup>3</sup> | O365,GoldG,CC1M<sup>&ddagger;</sup> | 40.1 | 34.5 | 39.5 | 41.5 | 32.9  | 29.1 | 30.4 | 37.4 | 50.2 / 58.2 |   🤗 [CKPT](https://huggingface.co/hao9610/OV-DINO/resolve/main/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth)      |
 
- **NOTE**: AP<sup>mv</sup> denotes the zero-shot evaluation results on LVIS MiniVal, AP<sup>val</sup> denotes the zero-shot evaluation results on LVIS Val, AP<sup>coco</sup> denotes (zero-shot / fine-tune) evaluation results on COCO, respectively.
+ **NOTE**: *AP<sup>mv</sup> denotes the zero-shot evaluation results on LVIS MiniVal, AP<sup>val</sup> denotes the zero-shot evaluation results on LVIS Val, AP<sup>coco</sup> denotes (zero-shot / fine-tune) evaluation results on COCO, respectively.*
 
 ## :checkered_flag: Getting Started
 ### 1. Project Structure
@@ -248,7 +248,7 @@ bash scripts/finetune.sh \
   bash scripts/pretrain.sh \
     projects/ovdino/configs/ovdino_swin_tiny224_bert_base_pretrain_o365_24ep.py
   ```
-  NOTE: The default batch size for O365 pre-training is 64 in our experiments, and running on 2 nodes with 8 A100 GPUs per-node. If you encounter Out-of-Memory error, you can adjust the batch size and learning rate, total steps by linearly.
+  **NOTE**: *The default batch size for O365 pre-training is 64 in our experiments, and running on 2 nodes with 8 A100 GPUs per-node. If you encounter Out-of-Memory error, you can adjust the batch size and learning rate, total steps by linearly.*
 #### Pre-Training on [Objects365, GoldG] datasets
   
   Coming soon ...
@@ -257,7 +257,7 @@ bash scripts/finetune.sh \
 
   Coming soon ...
   
-*We will release the all pre-training code after our paper is accepted.*
+**NOTE**: *We will release the all pre-training code after our paper is accepted.*
 
 ## :computer: Demo
 * Local inference on a image or folder give the category names.
@@ -288,7 +288,7 @@ bash scripts/finetune.sh \
     ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth \
     "class0 long_class1 long_class2 ..." image_dir output_dir
   ```
-  NOTE: the input category_names are separated by spaces, and the words of single class are connected by underline (_).
+  **NOTE**: *The input category_names are separated by spaces, and the words of single class are connected by underline (_).*
 
 * Web inference demo.
 
