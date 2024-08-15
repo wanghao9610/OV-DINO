@@ -277,7 +277,7 @@ Category ids in annotations are not in [1, #categories]! We'll apply a mapping f
 
     rank0_print(
         f"Loaded {len(dataset_dicts)} data points from {dataset_name}, template: {template}\n"
-        + f"Sample: {sampled_cat_names[0]}"
+        + f"Sample: {sampled_cat_names}"
     )
 
     if num_instances_without_valid_segmentation > 0:

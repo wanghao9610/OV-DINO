@@ -245,7 +245,7 @@ def load_lvis_ovd_json(
             dataset_dicts.append(record)
 
     rank0_print(
-        f"Loaded {len(dataset_dicts)} data points from {dataset_name}\nSample: {cat_names[0]}"
+        f"Loaded {len(dataset_dicts)} data points from {dataset_name}\nSample: {cat_names}"
     )
 
     return dataset_dicts
