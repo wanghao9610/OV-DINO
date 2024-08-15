@@ -308,9 +308,10 @@ bash scripts/finetune.sh \
 - [x] Release the fine-tuning and evaluation code.
 - [x] Support the local inference demo.
 - [x] Support the web inference demo.
-- [o] Release the pre-training code.
+- [x] Release the pre-training code on O365 dataset.
 - [ ] Support ONNX exporting OV-DINO model.
 - [ ] Support OV-DINO in 🤗 transformers.
+- [ ] Release the all pre-training code.
 
 ## :blush: Acknowledge
 This project has referenced some excellent open-sourced repos ([Detectron2](https://github.com/facebookresearch/detectron2), [detrex](https://github.com/IDEA-Research/detrex), [GLIP](https://github.com/microsoft/GLIP), [G-DINO](https://github.com/IDEA-Research/GroundingDINO), [YOLO-World](https://github.com/AILab-CVC/YOLO-World)). Thanks for their wonderful works and contributions to the community.
