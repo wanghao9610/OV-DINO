@@ -14,7 +14,7 @@ from omegaconf import OmegaConf
 
 dataloader = OmegaConf.create()
 
-# If you want to define it by yourself, you can change it on ovdino/detrex/data/datasets/custom_ovd.py, you need to uncomment out the following code (ovdino/detrex/data/datasets/__init__.py L21) first.
+# If you want to define it by yourself, you can change it on ovdino/detrex/data/datasets/custom_ovd.py, you need to uncomment the code (ovdino/detrex/data/datasets/__init__.py L21) first.
 # If you follow the coco format, you need uncomment and change the following code.
 # register_coco_ovd_instances(
 #     "custom_train_ovd_unipro",  # dataset_name
