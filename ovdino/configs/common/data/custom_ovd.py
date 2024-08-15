@@ -9,14 +9,14 @@ from detectron2.data import (
 )
 from detectron2.evaluation import COCOEvaluator
 from detrex.data import DetrDatasetMapper
-from detrex.data.datasets import register_coco_ovd_instances
+from detrex.data.datasets import register_custom_ovd_instances
 from omegaconf import OmegaConf
 
 dataloader = OmegaConf.create()
 
 # If you want to define it by yourself, you can change it on ovdino/detrex/data/datasets/custom_ovd.py, you need to uncomment the code (ovdino/detrex/data/datasets/__init__.py L21) first.
 # If you follow the coco format, you need uncomment and change the following code.
-# register_coco_ovd_instances(
+# register_custom_ovd_instances(
 #     "custom_train_ovd_unipro",  # dataset_name
 #     {},  # custom_data_info, example: {"thing_dataset_id_to_contiguous_id": {0: 0, 1: 0}, "thing_classes": ["category_0", "category_1"]}
 #     "/path/to/train.json",  # annotations_json_file
@@ -24,7 +24,7 @@ dataloader = OmegaConf.create()
 #     2,  # number_of_classes, default: 2
 #     "full",  # template, default: full
 # )
-# register_coco_ovd_instances(
+# register_custom_ovd_instances(
 #     "custom_val_ovd_unipro",
 #     {}, # custom_data_info, example: {"thing_dataset_id_to_contiguous_id": {0: 0, 1: 0}, "thing_classes": ["category_0", "category_1"]}
 #     "/path/to/val.json",
@@ -32,7 +32,7 @@ dataloader = OmegaConf.create()
 #     2,
 #     "full",
 # )
-# register_coco_ovd_instances(
+# register_custom_ovd_instances(
 #     "custom_test_ovd",
 #     {}, # custom_data_info, example: {"thing_dataset_id_to_contiguous_id": {0: 0, 1: 0}, "thing_classes": ["category_0", "category_1"]}
 #     "/path/to/test.json",
