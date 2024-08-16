@@ -14,40 +14,42 @@ from omegaconf import OmegaConf
 
 dataloader = OmegaConf.create()
 
-# If you want to define it by yourself, you can change it on ovdino/detrex/data/datasets/custom_ovd.py, you need to uncomment the code (ovdino/detrex/data/datasets/__init__.py L21) first.
-# If you follow the coco format, you need uncomment and change the following code (Recommend).
+# Case 0: If you want to define it by yourself, you can change it on ovdino/detrex/data/datasets/custom_ovd.py, you need to uncomment the code (ovdino/detrex/data/datasets/__init__.py L21) first.
+# Case 1 (Recommend): If you follow the coco format, you need uncomment and change the following code.
+# # 1. Define custom_meta_info, just a example, you need to change it to your own.
+# meta_info = {
+#     "thing_dataset_id_to_contiguous_id": {
+#         0: 0,
+#         1: 0,
+#     },  # key: dataset_id, value: contiguous_id
+#     "thing_classes": ["category_0", "category_1"],  # category names
+# }
+# # 2. Register custom train dataset.
 # register_custom_ovd_instances(
 #     "custom_train_ovd_unipro",  # dataset_name
-#     {
-#         "thing_dataset_id_to_contiguous_id": {0: 0, 1: 0}, # key: dataset_id, value: contiguous_id
-#         "thing_classes": ["category_0", "category_1"], # category names
-#     },  # custom_data_info, just a example.
+#     meta_info,
 #     "/path/to/train.json",  # annotations_json_file
 #     "/path/to/train/images",  # image_root
 #     2,  # number_of_classes, default: 2
 #     "full",  # template, default: full
 # )
+# # 3. Register custom val dataset.
 # register_custom_ovd_instances(
 #     "custom_val_ovd_unipro",
-#     {
-#         "thing_dataset_id_to_contiguous_id": {0: 0, 1: 0}, # key: dataset_id, value: contiguous_id
-#         "thing_classes": ["category_0", "category_1"], # category names
-#     },  # custom_data_info, just a example.
+#     meta_info,
 #     "/path/to/val.json",
 #     "/path/to/val/images",
 #     2,
 #     "full",
 # )
+# # 4. Optional, register custom test dataset.
 # register_custom_ovd_instances(
 #     "custom_test_ovd",
-#     {
-#         "thing_dataset_id_to_contiguous_id": {0: 0, 1: 0}, # key: dataset_id, value: contiguous_id
-#         "thing_classes": ["category_0", "category_1"], # category names
-#     },  # custom_data_info, just a example.
+#     meta_info,
 #     "/path/to/test.json",
 #     "/path/to/test/images",
 #     2,
-#     "identity",
+#     "full",  # choices: ["identity", "simple", "full"]
 # )
 
 dataloader.train = L(build_detection_train_loader)(
