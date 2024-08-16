@@ -19,8 +19,8 @@ dataloader = OmegaConf.create()
 # register_custom_ovd_instances(
 #     "custom_train_ovd_unipro",  # dataset_name
 #     {
-#         "thing_dataset_id_to_contiguous_id": {0: 0, 1: 0},
-#         "thing_classes": ["category_0", "category_1"],
+#         "thing_dataset_id_to_contiguous_id": {0: 0, 1: 0}, # key: dataset_id, value: contiguous_id
+#         "thing_classes": ["category_0", "category_1"], # category names
 #     },  # custom_data_info, just a example.
 #     "/path/to/train.json",  # annotations_json_file
 #     "/path/to/train/images",  # image_root
@@ -30,8 +30,8 @@ dataloader = OmegaConf.create()
 # register_custom_ovd_instances(
 #     "custom_val_ovd_unipro",
 #     {
-#         "thing_dataset_id_to_contiguous_id": {0: 0, 1: 0},
-#         "thing_classes": ["category_0", "category_1"],
+#         "thing_dataset_id_to_contiguous_id": {0: 0, 1: 0}, # key: dataset_id, value: contiguous_id
+#         "thing_classes": ["category_0", "category_1"], # category names
 #     },  # custom_data_info, just a example.
 #     "/path/to/val.json",
 #     "/path/to/val/images",
@@ -41,8 +41,8 @@ dataloader = OmegaConf.create()
 # register_custom_ovd_instances(
 #     "custom_test_ovd",
 #     {
-#         "thing_dataset_id_to_contiguous_id": {0: 0, 1: 0},
-#         "thing_classes": ["category_0", "category_1"],
+#         "thing_dataset_id_to_contiguous_id": {0: 0, 1: 0}, # key: dataset_id, value: contiguous_id
+#         "thing_classes": ["category_0", "category_1"], # category names
 #     },  # custom_data_info, just a example.
 #     "/path/to/test.json",
 #     "/path/to/test/images",

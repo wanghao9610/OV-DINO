@@ -322,7 +322,7 @@ def register_custom_ovd_instances(
     # 1. register a function which returns dicts
     DatasetCatalog.register(
         name,
-        lambda: load_coco_json(
+        lambda: load_custom_json(
             json_file,
             image_root,
             name,
@@ -360,7 +360,7 @@ if __name__ == "__main__":
     assert sys.argv[3] in DatasetCatalog.list()
     meta = MetadataCatalog.get(sys.argv[3])
 
-    dicts = load_coco_json(sys.argv[1], sys.argv[2], sys.argv[3])
+    dicts = load_custom_json(sys.argv[1], sys.argv[2], sys.argv[3])
     logger.info("Done loading {} samples.".format(len(dicts)))
 
     dirname = "coco-data-vis"
