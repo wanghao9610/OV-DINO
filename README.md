@@ -198,7 +198,7 @@ bash scripts/eval.sh \
 #### Zero-Shot Evaluation on LVIS Benchmark
 ```bash
 cd $root_dir/ovdino
-# Evaluation fixed_ap on LVIS MiniVal dataset.
+# Evaluation of fixed_ap on LVIS MiniVal dataset.
 bash scripts/eval.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_eval_lvismv.py \
   ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth \
