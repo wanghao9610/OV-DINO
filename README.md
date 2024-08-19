@@ -189,6 +189,7 @@ bash scripts/eval.sh path_to_eval_config_file path_to_pretrained_model output_di
 #### Zero-Shot Evaluation on COCO Benchmark
 ```bash
 cd $root_dir/ovdino
+# Evaluation mean ap on COCO dataset.
 bash scripts/eval.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_eval_coco.py \
   ../inits/ovdino/ovdino_swint_og-coco50.6_lvismv39.4_lvis32.2.pth \
@@ -197,11 +198,14 @@ bash scripts/eval.sh \
 #### Zero-Shot Evaluation on LVIS Benchmark
 ```bash
 cd $root_dir/ovdino
+# Evaluation fixed_ap on LVIS MiniVal dataset.
 bash scripts/eval.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_eval_lvismv.py \
   ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth \
   ../wkdrs/eval_ovdino
 
+# Evaluation of fixed_ap on the LVIS Val dataset. 
+# It will require about 250GB of memory due to the large number of samples in the LVIS Val dataset, so please ensure that your machine has enough memory.
 bash scripts/eval.sh \
   projects/ovdino/configs/ovdino_swin_tiny224_bert_base_eval_lvis.py \
   ../inits/ovdino/ovdino_swint_ogc-coco50.2_lvismv40.1_lvis32.9.pth \
