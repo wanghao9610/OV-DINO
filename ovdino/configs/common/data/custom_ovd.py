@@ -30,7 +30,7 @@ dataloader = OmegaConf.create()
 #     meta_info,
 #     "/path/to/train.json",  # annotations_json_file
 #     "/path/to/train/images",  # image_root
-#     2,  # number_of_classes, default: 2
+#     2,  # number_of_classes, default: 2. You also need to change model.num_classes in the ovdino/projects/ovdino/configs/ovdino_swin_tiny224_bert_base_ft_custom_24ep.py#L37.
 #     "full",  # template, default: full
 # )
 # # 3. Register custom val dataset.
