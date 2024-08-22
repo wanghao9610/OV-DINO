@@ -112,6 +112,13 @@ cd OV-DINO
 export root_dir=$(realpath ./)
 cd $root_dir/ovdino
 
+# Optional: set CUDA_HOME for cuda11.6.
+# OV-DINO utilizes the cuda11.6 default, if your cuda is not cuda11.6, you need first export CUDA_HOME env manually.
+export CUDA_HOME="your_cuda11.6_path"
+export PATH=$CUDA_HOME/bin:$PATH
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+echo -e "$log_format cuda version:\n$(nvcc -V)"
+
 # create conda env for ov-dino
 conda create -n ovdino -y
 conda activate ovdino
