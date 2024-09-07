@@ -170,8 +170,7 @@ Category ids in annotations are not in [1, #categories]! We'll apply a mapping f
 
     num_instances_without_valid_segmentation = 0
 
-    json_name = os.path.basename(json_file).split(".json")[0]
-    for img_dict, anno_dict_list in tqdm(imgs_anns, desc=f"Loading {json_name}"):
+    for img_dict, anno_dict_list in tqdm(imgs_anns, desc=f"Loading {dataset_name}"):
         record = {}
         record["file_name"] = os.path.join(image_root, img_dict["file_name"])
         record["height"] = img_dict["height"]
