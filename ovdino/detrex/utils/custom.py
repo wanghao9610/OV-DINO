@@ -22,8 +22,12 @@ def setup_dist_args(args):
     # the dist_url may be different in your environment.
     # Please refer to PyTorch's official documents for more details.
     num_nodes = os.getenv("NNODES", None)
+    try:
+        num_nodes = int(num_nodes)
+    except:
+        num_nodes = None
     if num_nodes is not None and num_nodes > 1:
-        node_rank = os.getenv("NODE_RANK", None)
+        node_rank = int(os.getenv("NODE_RANK", None))
         master_addr = os.getenv("MASTER_ADDR", "localhost")
         master_port = os.getenv("MASTER_PORT", "29500")
 

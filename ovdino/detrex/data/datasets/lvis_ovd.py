@@ -133,7 +133,8 @@ def load_lvis_ovd_json(
 
     dataset_dicts = []
 
-    for img_dict, anno_dict_list in tqdm(imgs_anns, desc="Loading dataset"):
+    json_name = os.path.basename(json_file).split(".json")[0]
+    for img_dict, anno_dict_list in tqdm(imgs_anns, desc=f"Loading {json_name}"):
         # for (img_dict, anno_dict_list) in imgs_anns:
         # category_start_index: the shiftd category index for split chunk.
         if chunk_categories:

@@ -170,7 +170,8 @@ Category ids in annotations are not in [1, #categories]! We'll apply a mapping f
 
     num_instances_without_valid_segmentation = 0
 
-    for img_dict, anno_dict_list in tqdm(imgs_anns, desc="Loading dataset"):
+    json_name = os.path.basename(json_file).split(".json")[0]
+    for img_dict, anno_dict_list in tqdm(imgs_anns, desc=f"Loading {json_name}"):
         record = {}
         record["file_name"] = os.path.join(image_root, img_dict["file_name"])
         record["height"] = img_dict["height"]
@@ -245,9 +246,9 @@ Category ids in annotations are not in [1, #categories]! We'll apply a mapping f
                 clean_words_or_phrase(cat_name) for _, cat_name in id2name.items()
             ]
             sampled_cat_names = [
-                    [template.format(cat_name) for template in template_meta[template]]
-                    for cat_name in sampled_cat_names
-                ]
+                [template.format(cat_name) for template in template_meta[template]]
+                for cat_name in sampled_cat_names
+            ]
 
         # sample category from category_list
         if not test_mode and num_sampled_classes > 0:
