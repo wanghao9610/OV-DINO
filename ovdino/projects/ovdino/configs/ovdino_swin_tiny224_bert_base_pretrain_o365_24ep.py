@@ -35,6 +35,9 @@ train.clip_grad.params.norm_type = 2
 train.device = "cuda"
 model.device = train.device
 
+# amp
+train.amp.enabled = True
+
 # find_unused_parameters
 # train.ddp.find_unused_parameters = True
 

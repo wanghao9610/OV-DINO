@@ -36,6 +36,9 @@ train.device = "cuda"
 model.device = train.device
 model.num_classes = 80
 
+# amp
+train.amp.enabled = True
+
 # find_unused_parameters
 # train.ddp.find_unused_parameters = True
 
