@@ -149,7 +149,7 @@ pip install -e ./
   wget http://images.cocodataset.org/zips/val2017.zip -O datas/coco/val2017.zip
   wget http://images.cocodataset.org/annotations/annotations_trainval2017.zip -O datas/coco/annotations_trainval2017.zip
   ```
-* Extract the ziped files, and remove them:
+* Extract the zipped files, and remove them:
   ```bash
   cd $root_dir
   unzip datas/coco/train2017.zip -d datas/coco
